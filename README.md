@@ -21,6 +21,18 @@ before settling on this one or that one or the other.**
     - There are eight javascript libraries in the 3D section
       - https://en.wikipedia.org/wiki/List_of_3D_graphics_libraries#JavaScript-based_engines
 
+- GraphicsJS
+  - http://www.graphicsjs.org/
+  - "A lightweight JavaScript graphics library with an intuitive API, based on SVG/VML technology."
+  - Site is very Euclidian
+  - Not seeing it in the lists at the wikipedia **but might be a good place to start**
+
+- The Top 24 Fractal Open Source Projects
+  - https://awesomeopensource.com/projects/fractal?categoryPage=7
+
+- Free Open Source Linux Fractals and Procedural Generation Software
+  - https://sourceforge.net/directory/graphics/graphics/fractals/os:linux/
+
 - The Top 29 Graphics Library Open Source Projects
   - https://awesomeopensource.com/projects/graphics-library?categoryPage=2
   - Categories > Graphics > Graphics Library
@@ -39,18 +51,26 @@ before settling on this one or that one or the other.**
   - #48: luma
     - luma provides easy-to-use WebGL2-based building blocks enabling high-performance GPU-based data visualization and computation in your browser.
     - GitHub: https://github.com/uber/luma.gl
-- JavaScript Graphics Library (JSGL)
-  - http://www.jsgl.org/doku.php?id=home
-  - JSGL is an Open-Source, browser independent 2D vector graphics library for JavaScript.
-  - It provides a well-designed, object-oriented API for creating interactive graphics applications in JavaScript.
-  - In integrates VML/SVG vector markup languages. However, the API provided is cross-browser, leaving all the hard work to JSGL.
+
+- 10+ JavaScript libraries to draw your own diagrams (2020 edition)
+  - https://modeling-languages.com/javascript-drawing-libraries-diagrams/
 
 - 3 top open source JavaScript chart libraries
   - https://opensource.com/article/18/9/open-source-javascript-chart-libraries
 
+- What are the best JavaScript drawing libraries?
+  - https://www.slant.co/topics/28/~best-javascript-drawing-libraries
+  - Looks like it is crowdsourced
 
+- JavaScript Graphics Library (JSGL)
+  - http://www.jsgl.org/doku.php?id=home
+  - "JSGL is an Open-Source, browser independent 2D vector graphics library for JavaScript."
+  - "It provides a well-designed, object-oriented API for creating interactive graphics applications in JavaScript."
+  - "In integrates VML/SVG vector markup languages. However, the API provided is cross-browser, leaving all the hard work to JSGL."
 
-
+- Plotly JavaScript Open Source Graphing Library
+  - https://plotly.com/javascript/
+  - Recall seeing it in at least 1 or 2 of the lists above, I am sure
 
 
 
