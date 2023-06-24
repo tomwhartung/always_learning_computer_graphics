@@ -15,13 +15,11 @@ we might not even need to use a graphics package!
 
 # List of Projects
 
-- [ ] Project 1: MDN Drawing Graphics Page
+- [x] Project 1: MDN Drawing Graphics Page
   - Reference:
     - [MDN Drawing Graphics page](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Drawing_graphics)
-  - Notes:
-    - `mdn/notes/1-drawing_graphics.md`
-  - Code:
-    - `mdn/projects/1-drawing_graphics`
+  - Notes: `mdn/notes/1-drawing_graphics.md`
+  - Code: `mdn/projects/1-drawing_graphics`
 
-- [ ] Project X: ??? With React, TypeScript, and MDB
+- [ ] Project 2: *"Groja-esque"* Image With React, TypeScript, and MDB
 
