@@ -1,6 +1,6 @@
 //
-// src/App.tsx: Main file for the 7c-lsup-array_of_numbers project
-// ---------------------------------------------------------------
+// src/App.tsx: Main file for the 2-grojaesque-proof_of_concept
+// ------------------------------------------------------------
 //
 import './App.css'
 
@@ -12,6 +12,12 @@ interface MySliderProps {
   sliderNo: number;
   onSliderChange: (evt: ChangeEvent<Element>) => void;
   sliderVal: number;
+}
+interface GrojaesqueImageProps {
+  transparency: number;
+  blueYellowVsGreenRed: number;
+  blueVsYellow: number;
+  greenVsRed: number;
 }
 interface MySliderResultProps {
   slNo: number;
@@ -72,6 +78,48 @@ function MySliderCard( props:MySliderProps ) {
     </div>
   )
 }
+// GrojaesqueImageRows: function component to display a grojaesque image
+function GrojaesqueImageRows( props:GrojaesqueImageProps ) {
+
+  return (
+    <>
+      <div className="row mt-4 d-flex justify-content-center">
+        <div className="col-md-12">
+          <div className="card">
+            <canvas className="grojaesqueCanvas">
+              <p>Oh no!  Your browser does not support basic graphics commands!!</p>
+              <p>Oh non! Votre navigateur ne prend pas en charge les commandes graphiques de base !!</p>
+              <p>¡Oh, no! ¡Su navegador no admite comandos básicos de gráficos!</p>
+              <p>Ach nein! Ihr Browser unterstützt keine grundlegenden Grafikbefehle!!</p>
+            </canvas>
+          </div>
+        </div>
+      </div>
+      <div className="row mt-4 d-flex justify-content-center">
+        <div className="col-md-3">
+          <div className="card">
+            <p>"Transp": {props.transparency}</p>
+          </div>
+        </div>
+        <div className="col-md-3">
+          <div className="card">
+            <p>"BY_vs_GR": {props.blueYellowVsGreenRed}</p>
+          </div>
+        </div>
+        <div className="col-md-3">
+          <div className="card">
+            <p>"B_vs_y": {props.blueVsYellow}</p>
+          </div>
+        </div>
+        <div className="col-md-3">
+          <div className="card">
+            <p>"G_vs_R": {props.greenVsRed}</p>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
 // MySliderResultsCard: function component to display the slider values
 function MySliderResultsCard( props:MySliderResultProps ) {
   const ordinal = ordinalsArray[props.slNo + 1];
@@ -88,28 +136,8 @@ function MySliderResultsCard( props:MySliderResultProps ) {
 
 // MyContainer: function component containing an MDB container
 function MyContainer() {
-  const [value1, setValue1] = useState(defaultValue);
-  const [value2, setValue2] = useState(defaultValue);
-  const slNo1 = numberOfSliderCards + 0;
-  const slNo2 = numberOfSliderCards + 1;
-
   const [values, setValues] = useState([defaultValue]);
 
-// Huh.  This causes a "Too many re-renders" error in the JS Console.  Hmmm-K.  Good to know!
-// for ( let slNo = 0; slNo < numberOfSliderCards; slNo++ ) {
-//   setValues(previousValues => [...previousValues, defaultValue]);
-// }
-
-  function handleChangeSingleValues( evt:ChangeEvent, slNo:number ) {
-    const val = (evt.target as HTMLInputElement).value;
-    console.log("Value of single slider slNo = " + slNo + " is now " + val);
-    if ( slNo == slNo1 ) {
-      setValue1(Number(val));
-    } else
-    if ( slNo == slNo2 ) {
-      setValue2(Number(val));
-    }
-  }
   function handleChangeArrayOfNumbers( evt:ChangeEvent, col:number ) {
     const val = (evt.target as HTMLInputElement).value;
     console.log("Value of slider in column " + col + " is now " + val);
@@ -147,43 +175,15 @@ function MyContainer() {
   return (
     <div className="container">
       <div className="row mt-4 d-flex justify-content-center">
+        <GrojaesqueImageRows transparency={values[0]} blueVsYellow={values[1]} greenVsRed={values[2]} blueYellowVsGreenRed={values[3]} />
+      </div>
+      <div className="row mt-4 d-flex justify-content-center">
         <h3>`MySliderCard`s Using an Array of Numbers</h3>
         {sliderNumberCols}
       </div>
       <div className="row mt-4 d-flex justify-content-center">
         <h3>`MySliderResultsCard`s Using an Array of Numbers</h3>
         {sliderResultCols}
-      </div>
-      <div className="row mt-4 d-flex justify-content-center">
-        <h3>Hard-coded List of `MySlider`s</h3>
-        <div className="col-md-3">
-          <MySliderCard
-            sliderNo={slNo1}
-            sliderVal={value1}
-            onSliderChange={ (evt) => handleChangeSingleValues(evt,slNo1) }
-          />
-        </div>
-        <div className="col-md-3">
-          <MySliderCard
-            sliderNo={slNo2}
-            sliderVal={value2}
-            onSliderChange={ (evt) => handleChangeSingleValues(evt,slNo2) }
-          />
-        </div>
-      </div>
-      <div className="row mt-4 d-flex justify-content-center">
-        <div className="col-md-3">
-          <MySliderResultsCard
-            slNo={slNo1}
-            slVal={value1}
-          />
-        </div>
-        <div className="col-md-3">
-          <MySliderResultsCard
-            slNo={slNo2}
-            slVal={value2}
-          />
-        </div>
       </div>
     </div>
   )
@@ -193,7 +193,7 @@ function MyContainer() {
 function App() {
   return (
     <>
-      <h1>My Four <code>MySlider</code>s App</h1>
+      <h1><span className="fst-italic">"Groja-esque"</span> Image App</h1>
       <MyContainer />
     </>
   )
