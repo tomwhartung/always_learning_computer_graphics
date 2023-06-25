@@ -22,4 +22,13 @@ we might not even need to use a graphics package!
   - Code: `mdn/projects/1-drawing_graphics`
 
 - [ ] Project 2: *"Groja-esque"* Image With React, TypeScript, and MDB
+  - References:
+    - [How to use a canvas in React](https://dev.to/masakudamatsu/how-to-use-html-canvas-with-react-hooks-2j47)
+  - Goal: Combine (1) and (2):
+    - (1) See *"groja-esque"* image in code for Project 1 in `mdn/projects/1-drawing_graphics`
+    - (2) See `mdbootstrap/README.md` in the `always_learning_javascript` repository
+      - Specifically, see *"Step 3.4."* of *"Project 7"* in `mdbootstrap/README.md`
+      - That is, see the notes file `mdbootstrap/notes/7c-lsup-array_of_numbers.md`
+  - Notes: `mdn/notes/2-grojaesque-proof_of_concept.md`
+  - Code: `mdn/projects/2-grojaesque-proof_of_concept`
 
