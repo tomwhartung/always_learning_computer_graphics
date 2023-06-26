@@ -2,6 +2,7 @@
 // src/App.tsx: Main file for the 2-grojaesque-proof_of_concept
 // ------------------------------------------------------------
 //
+import React from 'react'   // Copied from main.tsx to fix "error"
 import './App.css'
 
 import { ChangeEvent, useState } from 'react';
@@ -46,6 +47,30 @@ const ordinalsArray: readonly string[] = [
   "Thirteenth",
   "Fourteenth",
 ];
+// const canvasWidth = 300;
+// const canvasHeight = 300;
+// const GrojaesqueCanvas: React.FC<{}> = () = {
+//   return <canvas></canvas>;
+// }
+// const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
+//
+
+// From https://hashnode.blainegarrett.com/html-5-canvas-react-refs-and-typescript-ckf4jju8r00eypos1gyisenyf
+// const SimpleCanvasExample: React.FC<{}> = () => {
+//   return <canvas></canvas>;
+// };
+
+// From https://dev.to/masakudamatsu/how-to-use-html-canvas-with-react-hooks-2j47
+const Canvas = () => {
+  const canvas = React.useRef();
+  return (
+    <canvas
+      width="100"
+      height="100"
+    />
+  )
+}
+
 
 // MySlider: function component interface to the MDBRange component
 function MySlider( props:MySliderProps ) {
@@ -80,28 +105,22 @@ function MySliderCard( props:MySliderProps ) {
 }
 // GrojaesqueImageRows: function component to display a grojaesque image
 function GrojaesqueImageRows( props:GrojaesqueImageProps ) {
-  const canvasWidth = 300;
-  const canvasHeight = 300;
-  const canvas: HTMLCanvasElement = document.querySelector(".grojaesqueCanvas") as HTMLCanvasElement;
-  const width: number = canvasWidth;
-  const height: number = canvasHeight;
-
-  const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
-
+// const width: number = canvasWidth;
+// const height: number = canvasHeight;
 // ctx.fillStyle = "rgb(0, 0, 0)";
 // ctx.fillRect(0, 0, width, height);
 
+//           <canvas className="grojaesqueCanvas" width="{canvasWidth}" height="{canvasHeight}">
+//             <p>Oh no!  Your browser does not support basic graphics commands!!</p>
+//             <p>Oh non! Votre navigateur ne prend pas en charge les commandes graphiques de base !!</p>
+//             <p>¡Oh, no! ¡Su navegador no admite comandos básicos de gráficos!</p>
+//             <p>Ach nein! Ihr Browser unterstützt keine grundlegenden Grafikbefehle!!</p>
+//           </canvas>
   return (
     <>
       <div className="row mt-4 d-flex justify-content-center">
         <div className="col-md-12">
           <div className="card">
-            <canvas className="grojaesqueCanvas" width="{canvasWidth}" height="{canvasHeight}">
-              <p>Oh no!  Your browser does not support basic graphics commands!!</p>
-              <p>Oh non! Votre navigateur ne prend pas en charge les commandes graphiques de base !!</p>
-              <p>¡Oh, no! ¡Su navegador no admite comandos básicos de gráficos!</p>
-              <p>Ach nein! Ihr Browser unterstützt keine grundlegenden Grafikbefehle!!</p>
-            </canvas>
           </div>
         </div>
       </div>
