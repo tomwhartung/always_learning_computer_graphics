@@ -1,11 +1,14 @@
 import React from 'react';
 
-const Canvas = () => {
+// import PropTypes from 'prop-types'; // Added in Step 4
+
+const Canvas = ( {draw} ) => {     // Changed in Step 4
   const canvas = React.useRef();   // Added useRef in Step 2
 
-  // ADDED useEffect in Step 3:
+  // Added useEffect in Step 3:
   React.useEffect(() => {
     const context = canvas.current.getContext('2d');
+    draw(context); // Added in Step 4
   });
 
   return (
@@ -16,5 +19,10 @@ const Canvas = () => {
     />
   )
 };
+
+// Added in Step 4
+// Canvas.propTypes = {
+//   draw: PropTypes.func.isRequired,
+// };
 
 export default Canvas;
