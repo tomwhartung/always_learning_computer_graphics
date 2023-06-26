@@ -81,3 +81,58 @@ Fix it by renaming the file:
 - [x] Check project in VSCode - Looks OK!
 - [x] Update github: `src/Canvas.js` and `src/App.tsx`
 
+## 2.2. *"Step 2: Refer to the canvas element"*
+
+### 2.2.1. Update `Canvas.jsx`
+
+Add these two lines to the `Canvas` arrow function, as shown in the Reference:
+
+```
+. . .
+  const canvas = React.useRef(); // ADDED
+. . .
+    ref={canvas} // ADDED
+. . .
+```
+
+Quoting from the Reference:
+
+> once the canvas element is rendered on the screen, we can refer to it as `canvas.current` in our JavaScript code.
+
+### 2.2.2. Check for Problems and Update github
+
+So far, so good!
+
+- Taking baby steps here so updating github as I go along!
+
+## 2.3. *"Step 3: Create the canvas context"*
+
+Quoting from the Reference:
+
+> This step is the trickiest part of using the HTML canvas with React. The solution is the useEffect hook:
+
+### 2.3.1. Update `Canvas.jsx`
+
+Add these three lines to the `Canvas` arrow function, between the `const canvas ...` and `return ...` statements:
+
+```
+. . .
+  React.useEffect(() => {
+    const context = canvas.current.getContext('2d');
+  });
+
+. . .
+```
+
+### 2.3.2. Check for Problems and Update github
+
+VSCode shows an eslint warning:
+
+- 'context' is assigned a value but never used.
+
+Thinking this will be fixed in the next step or two, so *updating github anyway.*
+
+## 2.4. *"Step 4: Draw an image"*
+
+This Step should actually be entitled *"Step 4: **Prepare to** Draw an image"*!
+
