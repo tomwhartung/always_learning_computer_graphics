@@ -80,13 +80,23 @@ function MySliderCard( props:MySliderProps ) {
 }
 // GrojaesqueImageRows: function component to display a grojaesque image
 function GrojaesqueImageRows( props:GrojaesqueImageProps ) {
+  const canvasWidth = 300;
+  const canvasHeight = 300;
+  const canvas: HTMLCanvasElement = document.querySelector(".grojaesqueCanvas") as HTMLCanvasElement;
+  const width: number = canvasWidth;
+  const height: number = canvasHeight;
+
+  const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
+
+// ctx.fillStyle = "rgb(0, 0, 0)";
+// ctx.fillRect(0, 0, width, height);
 
   return (
     <>
       <div className="row mt-4 d-flex justify-content-center">
         <div className="col-md-12">
           <div className="card">
-            <canvas className="grojaesqueCanvas">
+            <canvas className="grojaesqueCanvas" width="{canvasWidth}" height="{canvasHeight}">
               <p>Oh no!  Your browser does not support basic graphics commands!!</p>
               <p>Oh non! Votre navigateur ne prend pas en charge les commandes graphiques de base !!</p>
               <p>¡Oh, no! ¡Su navegador no admite comandos básicos de gráficos!</p>
