@@ -5,9 +5,11 @@ Create a totally random *"gorja-esque"* image that reflects the values of four s
 
 # 0. Overview:
 
-- [ ] 1. Start with Vite, Reactjs, MDB, TypeScript, and ESLint
-- [ ] 2. Copy in code from Project 1 in `mdn/projects/1-drawing_graphics/`
-- [ ] 3. Update code so that the image reflects the values of the four sliders
+- [x] 1. Start with Vite, Reactjs, MDB, TypeScript, and ESLint
+- [x] 2. Copy in code from the `mdbootstrap/projects/7c-lsup-array_of_numbers/` project in the `always_learning_javascript` repo
+- [!] 3. Copy in code from Project 1 in `mdn/projects/1-drawing_graphics/`
+  - Could not get this to work!  Rats!!
+- [ ] 4. Update code so that the image reflects the values of the four sliders
 
 # 1. Start with Vite, Reactjs, MDB, TypeScript, and ESLint
 
@@ -142,3 +144,4 @@ pwd                    # /var/www/always_learning/always_learning_computer_graph
 grep svg index.html src/*.*
 ```
 
+# 3. Update code so that the image reflects the values of the four sliders
