@@ -1,4 +1,6 @@
 //
+// 3-canvas_with_react_hooks/src/App.tsx: Taking a step back!
+// ----------------------------------------------------------
 // Reference:
 //   https://dev.to/masakudamatsu/how-to-use-html-canvas-with-react-hooks-2j47
 //
@@ -6,6 +8,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import './Canvas.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
