@@ -136,3 +136,91 @@ Thinking this will be fixed in the next step or two, so *updating github anyway.
 
 This Step should actually be entitled *"Step 4: **Prepare to** Draw an image"*!
 
+### 2.4.1. Update `Canvas.jsx` - First Try
+
+This step calls for making several changes to `Canvas.jsx`,
+so the following code box shows how the file should look for this step:
+
+```
+import React from 'react';
+import PropTypes from 'prop-types'; // ADDED
+
+const Canvas = ( {draw} ) => { // CHANGED
+  const canvas = React.useRef();
+
+  React.useEffect(() => {
+    const context = canvas.current.getContext('2d');
+    draw(context); // ADDED
+  });
+
+  return (
+    <canvas
+      ref={canvas}
+      width="100"
+      height="100"
+    />
+  )
+};
+
+// ADDED
+Canvas.propTypes = {
+  draw: PropTypes.func.isRequired,
+};
+
+export default Canvas;
+```
+
+### 2.4.1.1. Error!
+
+**This gives an error in the browser:**
+
+- Failed to resolve import "prop-types" from "src/Canvas.jsx". Does the file exist?
+
+Regarding `PropTypes`, the Reference refers to this page:
+
+- [Typechecking With PropTypes](https://legacy.reactjs.org/docs/typechecking-with-proptypes.html)
+
+Which is old!  Quoting from this page:
+
+> These docs are old and won’t be updated. Go to react.dev for the new React docs.
+> PropTypes aren’t commonly used in modern React. Use TypeScript for static type checking.
+
+### 2.4.1.2. Fixing the Error!
+
+**Commenting out the references to `propTypes` fixes the error.**
+
+### 2.4.2. Update `Canvas.jsx` - Second Try
+
+Following is our updated copy of `src/Canvas.jsx`:
+
+```
+import React from 'react';
+
+// import PropTypes from 'prop-types'; // Added in Step 4
+
+const Canvas = ( {draw} ) => {     // Changed in Step 4
+  const canvas = React.useRef();   // Added useRef in Step 2
+
+  // Added useEffect in Step 3:
+  React.useEffect(() => {
+    const context = canvas.current.getContext('2d');
+    draw(context); // Added in Step 4
+  });
+
+  return (
+    <canvas
+      ref={canvas}   // Added ref in Step 2
+      width="100"
+      height="100"
+    />
+  )
+};
+
+// Added in Step 4
+// Canvas.propTypes = {
+//   draw: PropTypes.func.isRequired,
+// };
+
+export default Canvas;
+```
+
