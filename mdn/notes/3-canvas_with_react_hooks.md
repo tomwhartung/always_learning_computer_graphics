@@ -253,3 +253,78 @@ const Canvas = ( {draw, width, height} ) => {   // Changed in Step 4 and Step 5
 
 There are no problems in VSCode and the app still runs in the browser, so updated github with these changes.
 
+## 2.6. *"Step 6: Render the canvas component"*
+
+### 2.6.1. Update `App.tsx` to Use the `Canvas` Component - First Try
+
+- [x] Step 6.1. Add the following `draw` arrow function to `App.tsx`:
+
+```
+const draw = context => {
+  // Insert your code to draw an image
+};
+```
+
+### 2.6.1.1. Get an Error
+
+This causes the following error:
+
+- Parameter 'context' implicitly has an 'any' type.
+
+### 2.6.1.2. Fix the Error
+
+- [x] Fix 1: declare `context` to be an `any` type
+  - `const draw = (context: any) => {`
+  - **This is an inferior solution,** but is ok in the short term.
+- [x] Fix 2: declare `context` to be of type `CanvasRenderingContext2D`
+  - `const draw = (context: CanvasRenderingContext2D) => {`
+  - **This is a better solution**
+
+
+- [x] Step 6.2. Add the following new `<div>` containing a `<Canvas ...` element to `App.tsx`:
+
+```
+      <div>
+        <Canvas draw={draw} height={100} width={100} />
+      </div>
+```
+
+### 2.6.2.1. Get an Error
+
+This causes the following error:
+
+- Could not find a declaration file for module './Canvas.jsx'. '... Canvas.jsx' implicitly has an 'any' type.
+
+### 2.6.2.2. [Try to] Fix the Error ...
+
+Looked at and tried several solutions:
+
+
+- https://stackoverflow.com/questions/41292559/could-not-find-a-declaration-file-for-module-module-name-path-to-module-nam#42505940
+  - https://stackoverflow.com/questions/41292559/could-not-find-a-declaration-file-for-module-module-name-path-to-module-nam?
+- https://stackoverflow.com/questions/56927551/how-to-resolve-could-not-find-a-declaration-file-for-module-request-context
+- https://blog.atomist.com/declaration-file-fix/
+- https://pjausovec.medium.com/how-to-fix-error-ts7016-could-not-find-a-declaration-file-for-module-xyz-has-an-any-type-ecab588800a8
+- https://akashmittal.com/could-not-find-declaration-file-module/
+- https://learnshareit.com/solution-for-the-error-could-not-find-declaration-file-for-module-lodash/
+
+There is a common thread to these, and I am leaving a couple of files here as evidence of this.
+
+### 2.6.2.3. ... Or Not!
+
+I tried to fix the error, but the app runs anyway, and I am ready to move on!
+
+Leaving these two files as evidence of the common thread found in the *"solutions"* listed above:
+
+- `mdn/projects/3-canvas_with_react_hooks/typings/index.d.ts`
+- `mdn/projects/3-canvas_with_react_hooks/tsconfig.json-typeroots-did_not_work`
+
+### 2.6.2. Check for Problems and Update github
+
+VSCode is still reporting a problem that I tried to fix, but was unable to.
+
+- I will be using this in an attempt to get Project 2 to work, but plan to do things a little differently
+  - I.e., am going to try to include the code in this project's `Canvas.jsx` in the main file `App.tsx`
+  - That way I do not have to `import` it, and so should not get the error.
+- Wondering why the fixes I found do not work, but think it's time to move on...
+
