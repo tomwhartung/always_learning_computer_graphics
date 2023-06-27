@@ -224,3 +224,32 @@ const Canvas = ( {draw} ) => {     // Changed in Step 4
 export default Canvas;
 ```
 
+### 2.4.2. Check for Problems and Update github
+
+There are no problems in VSCode and the app still runs in the browser, so updated github with these changes.
+
+## 2.5. *"Step 5: Make the component reusable"*
+
+This step entails updating `Canvas.jsx` so that the `width` and `height` of the `canvas` are props.
+
+- [x] Step 5.1. Add to the `const Canvas ...` line so that it looks like this:
+
+```
+const Canvas = ( {draw, width, height} ) => {   // Changed in Step 4 and Step 5
+```
+
+- [x] Step 5.2. Replace the hard-coded `100`s in the `<canvas ...` element with these new props:
+
+```
+   return (
+     <canvas
+       ref={canvas}       // Added ref in Step 2
+       width={width}      // Added width prop in Step 5
+       height={height}    // Added height prop in Step 5
+   />
+```
+
+### 2.5.2. Check for Problems and Update github
+
+There are no problems in VSCode and the app still runs in the browser, so updated github with these changes.
+
