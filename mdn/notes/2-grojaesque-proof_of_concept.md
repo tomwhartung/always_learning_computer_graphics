@@ -145,3 +145,16 @@ grep svg index.html src/*.*
 ```
 
 # 3. Update code so that the image reflects the values of the four sliders
+
+- [!] 1. Migrate code from `scripts.js` in Project 1 to `src/App.tsx` in Project 2
+  - [!] 1.1. Create a `GrojaesqueImageCard` component with code for random image
+  - [!] 1.2. Figure out how to pick random colors based on position of sliders
+  - [!] 1.3. Update names of variables to make sense with our goal
+
+**Note:** abandoning this project!
+
+- Got frustrated trying to use a `<canvas ...` element in React
+- Decided to take a step back and focus on that
+  - See Project 3, `3-canvas_with_react_hooks`, for how I eventually succeeded in getting a `<canvas ...` element to work in React
+- Continuing this project in Project 4, `4-canvas_with_sliders`
+
