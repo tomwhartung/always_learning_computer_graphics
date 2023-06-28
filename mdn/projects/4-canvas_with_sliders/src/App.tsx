@@ -74,6 +74,28 @@ const ordinalsArray: readonly string[] = [
 //   )
 // }
 
+// -------------------------------------
+// Trying to add in code from Project 3:
+// -------------------------------------
+const width = 333;
+const height = 333;
+const draw = (context: CanvasRenderingContext2D) => {
+  // Paint it black
+  context.fillStyle = "rgb(0, 0, 0)";
+  context.fillRect(0, 0, width, height);
+
+  // Add an opaque red rectangle at (50,50) that is 100 px wide and 150 px tall
+  context.fillStyle = "rgb(255, 0, 0)";
+  context.fillRect(50, 50, 100, 150);
+  // Add an opaque green rectangle at (75,75) that is 100 px wide and 100 px tall
+  context.fillStyle = "rgb(0, 255, 0)";
+  context.fillRect(75, 75, 100, 100);
+
+  // Add a translucent purple rectangle at (25,100) that is 175 px wide and 150 px tall
+  context.fillStyle = "rgba(255, 0, 255, 0.75)";
+  context.fillRect(25, 100, 175, 50);
+};
+
 
 // MySlider: function component interface to the MDBRange component
 function MySlider( props:MySliderProps ) {
@@ -225,6 +247,9 @@ function MyContainer() {
 function App() {
   return (
     <>
+      <div>
+        <Canvas draw={draw} width={width} height={height} />
+      </div>
       <h1><span className="fst-italic">"Groja-esque"</span> Image App</h1>
       <MyContainer />
     </>
