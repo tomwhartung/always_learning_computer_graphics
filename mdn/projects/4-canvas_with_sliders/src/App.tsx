@@ -19,9 +19,9 @@ interface MySliderProps {
 }
 interface GrojaesqueImageProps {
   transparency: number;
-  blueYellowVsGreenRed: number;
   blueVsYellow: number;
   greenVsRed: number;
+  bAndYVsGandR: number;
 }
 interface MySliderResultProps {
   slNo: number;
@@ -32,54 +32,20 @@ interface MySliderResultProps {
 const defaultValue = 50;
 const numberOfSliderCards = 4;      // Warning: Do not make this greater
                                     // than or equal to the number of
-                                    // elements in ordinalsArray!
-const ordinalsArray: readonly string[] = [
-  "Zeroeth",
-  "First",
-  "Second",
-  "Third",
-  "Fourth",
-  "Fifth",
-  "Sixth",
-  "Seventh",
-  "Eighth",
-  "Ninth",
-  "Tenth",
-  "Eleventh",
-  "Twelfth",
-  "Thirteenth",
-  "Fourteenth",
+                                    // elements in grojaesqueImagePropNames!
+const grojaesqueImagePropNames: readonly string[] = [
+  "transparency",
+  "blueVsYellow",
+  "greenVsRed",
+  "bAndYVsGandR",
 ];
-// const canvasWidth = 300;
-// const canvasHeight = 300;
-// const GrojaesqueCanvas: React.FC<{}> = () = {
-//   return <canvas></canvas>;
-// }
-// const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
-//
+const canvasWidth = 300;
+const canvasHeight = 300;
 
-// From https://hashnode.blainegarrett.com/html-5-canvas-react-refs-and-typescript-ckf4jju8r00eypos1gyisenyf
-// const SimpleCanvasExample: React.FC<{}> = () => {
-//   return <canvas></canvas>;
-// };
-
-// From https://dev.to/masakudamatsu/how-to-use-html-canvas-with-react-hooks-2j47
-// const Canvas = () => {
-//   const canvas = React.useRef();
-//   return (
-//     <canvas
-//       width="100"
-//       height="100"
-//     />
-//   )
-// }
-
-// -------------------------------------
-// Trying to add in code from Project 3:
-// -------------------------------------
-const width = 333;
-const height = 333;
 const draw = (context: CanvasRenderingContext2D) => {
+  const width = canvasWidth;
+  const height = canvasHeight;
+
   // Paint it black
   context.fillStyle = "rgb(0, 0, 0)";
   context.fillRect(0, 0, width, height);
@@ -99,7 +65,7 @@ const draw = (context: CanvasRenderingContext2D) => {
 
 // MySlider: function component interface to the MDBRange component
 function MySlider( props:MySliderProps ) {
-  const sliderLabel = ordinalsArray[props.sliderNo + 1] + " MySlider Component";
+  const sliderLabel = grojaesqueImagePropNames[props.sliderNo];
   const sliderId = "myslider-" + Number(props.sliderNo);
 
   return (
@@ -117,7 +83,6 @@ function MySlider( props:MySliderProps ) {
 
 // MySliderCard: function component interface to the MDBRange component
 function MySliderCard( props:MySliderProps ) {
-  //  <p>Value of "myslider-{props.sliderNo}" in the {lcOrd} card is {props.sliderVal}.</p>
   return (
     <div className="card">
       <MySlider
@@ -152,22 +117,22 @@ function GrojaesqueImageRows( props:GrojaesqueImageProps ) {
       <div className="row mt-4 d-flex justify-content-center">
         <div className="col-md-3">
           <div className="card">
-            <p>"Transp": {props.transparency}</p>
+            <p>{grojaesqueImagePropNames[0]}: {props.transparency}</p>
           </div>
         </div>
         <div className="col-md-3">
           <div className="card">
-            <p>"BY_vs_GR": {props.blueYellowVsGreenRed}</p>
+            <p>{grojaesqueImagePropNames[1]}: {props.blueVsYellow}</p>
           </div>
         </div>
         <div className="col-md-3">
           <div className="card">
-            <p>"B_vs_y": {props.blueVsYellow}</p>
+            <p>{grojaesqueImagePropNames[2]}: {props.greenVsRed}</p>
           </div>
         </div>
         <div className="col-md-3">
           <div className="card">
-            <p>"G_vs_R": {props.greenVsRed}</p>
+            <p>{grojaesqueImagePropNames[3]}: {props.bAndYVsGandR}</p>
           </div>
         </div>
       </div>
@@ -176,13 +141,10 @@ function GrojaesqueImageRows( props:GrojaesqueImageProps ) {
 }
 // MySliderResultsCard: function component to display the slider values
 function MySliderResultsCard( props:MySliderResultProps ) {
-  const ordinal = ordinalsArray[props.slNo + 1];
-  const lcOrd = ordinal.toLowerCase();
-
   return (
     <>
       <div className="card">
-        <p>Value of the {lcOrd} slider = {props.slVal}</p>
+        <p>{grojaesqueImagePropNames[props.slNo]} slider = {props.slVal}</p>
       </div>
     </>
   );
@@ -229,14 +191,18 @@ function MyContainer() {
   return (
     <div className="container">
       <div className="row mt-4 d-flex justify-content-center">
-        <GrojaesqueImageRows transparency={values[0]} blueVsYellow={values[1]} greenVsRed={values[2]} blueYellowVsGreenRed={values[3]} />
+        <GrojaesqueImageRows
+          transparency={values[0] ?? defaultValue}
+          blueVsYellow={values[1] ?? defaultValue}
+          greenVsRed={values[2] ?? defaultValue}
+          bAndYVsGandR={values[3] ?? defaultValue} />
       </div>
       <div className="row mt-4 d-flex justify-content-center">
-        <h3>`MySliderCard`s Using an Array of Numbers</h3>
+        <h3><code>MySliderCard</code>s</h3>
         {sliderNumberCols}
       </div>
       <div className="row mt-4 d-flex justify-content-center">
-        <h3>`MySliderResultsCard`s Using an Array of Numbers</h3>
+        <h3><code>MySliderResultsCard</code>s - Obsolete??</h3>
         {sliderResultCols}
       </div>
     </div>
@@ -245,6 +211,9 @@ function MyContainer() {
 
 // App: this App's "mainline" component
 function App() {
+  const width = canvasWidth;
+  const height = canvasHeight;
+
   return (
     <>
       <div>
