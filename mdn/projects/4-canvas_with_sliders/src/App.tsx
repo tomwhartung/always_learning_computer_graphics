@@ -8,6 +8,9 @@ import './App.css'
 import { ChangeEvent, useState } from 'react';
 import { MDBRange } from 'mdb-react-ui-kit';
 
+import Canvas from './Canvas.jsx';
+// const Canvas = require('./Canvas');
+
 // Important types
 interface MySliderProps {
   sliderNo: number;
