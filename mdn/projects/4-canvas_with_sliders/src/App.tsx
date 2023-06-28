@@ -39,9 +39,14 @@ const grojaesqueImagePropNames: readonly string[] = [
   "G vs R",
   "B&Y vs G&R",
 ];
-const canvasWidth = 300;
-const canvasHeight = 300;
+const gridTopX = 10;      // X location of top left corner of grid
+const gridTopY = 10;      // Y location of top left corner of grid
+const squareSize = 15;    // Size of each square
+const gridSize = 19;      // No. of squares in each row and column
+const canvasWidth = ( squareSize * gridSize ) + ( 2 * gridTopX );
+const canvasHeight = ( squareSize * gridSize ) + ( 2 * gridTopY );
 
+// draw: Add a "groja-esque" grid of blue, green, red, and yellow squares
 const draw = (context: CanvasRenderingContext2D) => {
   const width = canvasWidth;
   const height = canvasHeight;
@@ -50,17 +55,41 @@ const draw = (context: CanvasRenderingContext2D) => {
   context.fillStyle = "rgb(0, 0, 0)";
   context.fillRect(0, 0, width, height);
 
-  // Add an opaque red rectangle at (50,50) that is 100 px wide and 150 px tall
-  context.fillStyle = "rgb(255, 0, 0)";
-  context.fillRect(50, 50, 100, 150);
-  // Add an opaque green rectangle at (75,75) that is 100 px wide and 100 px tall
-  context.fillStyle = "rgb(0, 255, 0)";
-  context.fillRect(75, 75, 100, 100);
-
-  // Add a translucent purple rectangle at (25,100) that is 175 px wide and 150 px tall
-  context.fillStyle = "rgba(255, 0, 255, 0.75)";
-  context.fillRect(25, 100, 175, 50);
+  let squareTopX = gridTopX;
+  let squareTopY = gridTopY;
+  let randomColorLetter = "B";
+  
+  for ( let row=0; row < gridSize; row++ ) {
+    squareTopY = gridTopY + (row * squareSize);
+    for ( let col=0; col < gridSize; col++ ){
+      randomColorLetter = getRandomPrimaryColor();
+    // console.log( "randomColorLetter = " + randomColorLetter );
+      squareTopX = gridTopX + (col * squareSize);
+      if ( randomColorLetter == "B" ) {
+        context.fillStyle = "rgb(0, 0, 255, 1)";
+      } else if ( randomColorLetter == "G" ) {
+        context.fillStyle = "rgb(0, 255, 0, 1)";
+      } else if ( randomColorLetter == "R" ) {
+        context.fillStyle = "rgb(255, 0, 0, 1)";
+      } else if ( randomColorLetter == "Y" ) {
+        context.fillStyle = "rgb(255, 255, 0, 1)";
+      } else {
+        context.fillStyle = "rgb(255, 255, 255, 1)";
+      }
+      context.fillRect( squareTopX, squareTopY, squareSize, squareSize );
+    }
+  }
 };
+
+// getRandomPrimaryColor: return a single character, "B", "G", "R", or "Y"
+function getRandomPrimaryColor() {
+  const min = 0;
+  const max = 4;
+  const colorLetters = [ "B", "G", "R", "Y", ];
+  const randomInt = Math.floor(Math.random() * (max - min) + min);
+  const randomColorLetter = colorLetters[randomInt];
+  return randomColorLetter;
+}
 
 
 // MySlider: function component interface to the MDBRange component
