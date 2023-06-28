@@ -113,3 +113,87 @@ grep svg index.html src/*.*  # check that there are no lingering references to t
 
 Everything looks good so check this version in as our starting point.
 
+# 3. Update Code to Draw a Simple Image on a `<canvas ...` Element
+
+Try to incorporate code we got to work in Project 3.
+
+## 3.1. Include `Canvas.jsx` As-Is:
+
+### 3.1.1. Tempt Fate And ...
+
+- [x] Copy over `Canvas.jsx` from Project 3 (first code box) and...:
+- [x] Add the `import` (first) or `require` (maybe later) to `App.tsx` (second code box):
+
+```
+pwd   # /var/www/always_learning/always_learning_computer_graphics/mdn/projects
+
+cp 3-canvas_with_react_hooks/src/Canvas.jsx 4-canvas_with_sliders/src/
+```
+
+```
+import Canvas from './Canvas.jsx'
+// const Canvas = require('./Canvas');
+```
+
+### 3.2.2. VSCode Error
+
+Getting ye olde *"declaration file"* error:
+
+- Could not find a declaration file for module './Canvas.jsx'. '... /src/Canvas.jsx' implicitly has an 'any' type.
+
+**Note:** we have already spent quite a bit of time trying to solve this problem.
+
+- For details, see subsection *"2.6.2.1. Get an Error"* in `mdn/notes/3-canvas_with_react_hooks.md`
+
+### 3.2.3. Update github
+
+App still runs ok, so I am moving on.
+
+## 3.2. Update `App.tsx` to Use the `Canvas`
+
+### 3.1.1. Copy-and-Paste Code
+
+- From `mdn/projects/3-canvas_with_react_hooks/src/App.tsx` in Project 3
+- To `mdn/projects/4-canvas_with_sliders/src/App.tsx` in Project 4
+
+- [x] Copy-and-paste code from this code box to define some `const`s near the top of the file:
+
+```
+const width = 333;
+const height = 333;
+const draw = (context: CanvasRenderingContext2D) => {
+  // Paint it black
+  context.fillStyle = "rgb(0, 0, 0)";
+  context.fillRect(0, 0, width, height);
+
+  // Add an opaque red rectangle at (50,50) that is 100 px wide and 150 px tall
+  context.fillStyle = "rgb(255, 0, 0)";
+  context.fillRect(50, 50, 100, 150);
+  // Add an opaque green rectangle at (75,75) that is 100 px wide and 100 px tall
+  context.fillStyle = "rgb(0, 255, 0)";
+  context.fillRect(75, 75, 100, 100);
+
+  // Add a translucent purple rectangle at (25,100) that is 175 px wide and 150 px tall
+  context.fillStyle = "rgba(255, 0, 255, 0.75)";
+  context.fillRect(25, 100, 175, 50);
+};
+```
+
+- [x] Copy-and-paste code from this code box to use the `Canvas` into the `App` function component:
+
+```
+<div>
+  <Canvas draw={draw} width={width} height={height} />
+</div>
+```
+
+### 3.1.2. OMG/ADM/OMD It Works!
+
+Still getting ye olde *"declaration file"* error, that we have already spent quite a bit of time trying to fix.
+
+- For details, see subsection *"2.6.2.1. Get an Error"* in `mdn/notes/3-canvas_with_react_hooks.md`
+
+### 3.1.3. Update github
+
+App runs ok - and shows an image, **YES!!** - so I am moving on!
+
