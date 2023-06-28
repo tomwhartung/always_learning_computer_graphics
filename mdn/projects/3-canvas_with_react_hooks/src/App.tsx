@@ -7,8 +7,10 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
-import Canvas from './Canvas.jsx'
+import './App.css';
+
+// import Canvas from './Canvas.jsx'
+const Canvas = require('./Canvas');
 
 const width = 333;
 const height = 333;
