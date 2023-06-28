@@ -299,9 +299,9 @@ This causes the following error:
 
 Looked at and tried several solutions:
 
-
 - https://stackoverflow.com/questions/41292559/could-not-find-a-declaration-file-for-module-module-name-path-to-module-nam#42505940
   - https://stackoverflow.com/questions/41292559/could-not-find-a-declaration-file-for-module-module-name-path-to-module-nam?
+  - This post includes two pages of answers, including how to "fix" it using `require`
 - https://stackoverflow.com/questions/56927551/how-to-resolve-could-not-find-a-declaration-file-for-module-request-context
 - https://blog.atomist.com/declaration-file-fix/
 - https://pjausovec.medium.com/how-to-fix-error-ts7016-could-not-find-a-declaration-file-for-module-xyz-has-an-any-type-ecab588800a8
@@ -310,7 +310,7 @@ Looked at and tried several solutions:
 
 There is a common thread to these, and I am leaving a couple of files here as evidence of this.
 
-### 2.6.2.3. ... Or Not!
+### 2.6.2.3. ... Or Not?
 
 I tried to fix the error, but the app runs anyway, and I am ready to move on!
 
@@ -319,7 +319,7 @@ Leaving these two files as evidence of the common thread found in the *"solution
 - `mdn/projects/3-canvas_with_react_hooks/typings/index.d.ts`
 - `mdn/projects/3-canvas_with_react_hooks/tsconfig.json-typeroots-did_not_work`
 
-### 2.6.2. Check for Problems and Update github
+### 2.6.3. Check for Problems and Update github
 
 VSCode is still reporting a problem that I tried to fix, but was unable to.
 
@@ -327,4 +327,31 @@ VSCode is still reporting a problem that I tried to fix, but was unable to.
   - I.e., am going to try to include the code in this project's `Canvas.jsx` in the main file `App.tsx`
   - That way I do not have to `import` it, and so should not get the error.
 - Wondering why the fixes I found do not work, but think it's time to move on...
+
+### 2.6.4. Just Make the Error Go Away!
+
+Well, now I want to look at Project 3 side-by-side with Project 4, and this error is very distracting.
+If something I do causes a new error, I want know that right away!
+
+OK, so this post:
+https://stackoverflow.com/questions/41292559/could-not-find-a-declaration-file-for-module-module-name-path-to-module-nam#42505940
+shows how to "fix" the error using `require` rather than `import`, but *that technique leads to this error:*
+
+- Require statement not part of import statement.
+
+This post:
+https://stackoverflow.com/questions/59278151/eslint-require-statement-not-part-of-import-statement-typescript-eslint-no-va
+shows how to "fix" this error by adding the line marked with a `+` in the following code box to the
+`rules` section of `.eslintrc.js`:
+
+```
+   rules: {
+     'react-refresh/only-export-components': 'warn',
++    '@typescript-eslint/no-var-requires': 0,
+   },
+```
+
+### 2.6.4.1. Check for Problems and Update github
+
+This "fix" made the error go away, so I updated github and am moving on.
 
