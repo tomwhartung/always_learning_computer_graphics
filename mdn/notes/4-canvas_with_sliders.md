@@ -151,7 +151,7 @@ App still runs ok, so I am moving on.
 
 ## 3.2. Update `App.tsx` to Use the `Canvas`
 
-### 3.1.1. Copy-and-Paste Code
+### 3.2.1. Copy-and-Paste Code
 
 - From `mdn/projects/3-canvas_with_react_hooks/src/App.tsx` in Project 3
 - To `mdn/projects/4-canvas_with_sliders/src/App.tsx` in Project 4
@@ -187,13 +187,51 @@ const draw = (context: CanvasRenderingContext2D) => {
 </div>
 ```
 
-### 3.1.2. OMG/ADM/OMD It Works!
+### 3.2.2. OMG/ADM/OMD It Works!
 
 Still getting ye olde *"declaration file"* error, that we have already spent quite a bit of time trying to fix.
 
 - For details, see subsection *"2.6.2.1. Get an Error"* in `mdn/notes/3-canvas_with_react_hooks.md`
 
-### 3.1.3. Update github
+### 3.2.3. Update github
 
 App runs ok - and shows an image, **YES!!** - so I am moving on!
+
+## 3.3. Cleanup Code and Rearrange Elements
+
+Took the following steps to cleanup the code:
+
+- [x] Remove old comments
+- [x] Update to:
+  - [x] Create global variables `canvasWidth` and `canvasHeight`
+  - [x] Use them to set local variables `Width` and `height`
+- [x] Shorten heading to "`MySliderCard`s"
+- [x] Shorten heading to "`MySliderResultsCard`s"
+- [x] Cosmetic updates to `src/App.css`
+  - [x] Remove unused `read-the-docs` class
+  - [x] Set color of `code` elements to `darkblue`
+- [x] Changed sequence of rows in the `GrojaesqueImageRows` component
+- [x] Added `grojaesqueImagePropNames` for consistent naming of slider `value`s
+  - [x] Updated `App.tsx` to use it in
+    - [x] `GrojaesqueImageRows`
+    - [x] `MySliderResultsCard`s
+    - [x] `MySliderCard`s
+- [x] Set `value`s passed to `GrojaesqueImageRows` to `defaultValue`s
+- [x] Removed all occurrences of `lcOrd` variable
+- [x] Removed all occurrences of `ordinalsArray` array
+- [x] Rearranged elements so they look cool, with prop values next to image, etc.
+
+### 3.3.2. **New** VSCode Error
+
+Ye olde *"declaration file"* error is now gone and we have this one:
+
+- Property 'function' is missing in type '{ draw: (context: CanvasRenderingContext2D) => void; width: number; height: number; }' but required in type '{ draw: any; function: any; width: any; height: any; }'.
+
+**App runs ok** and looks good, so maybe fix it later.
+
+### 3.3.3. Update github
+
+App works ok - and looks much better* - and VSCode and lint still report just one error(*).
+
+(*) Actually running 'npm run lint` reports a new error in `Canvas.tsx`, but I am not using that file, yet.
 
