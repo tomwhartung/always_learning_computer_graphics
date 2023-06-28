@@ -34,10 +34,10 @@ const numberOfSliderCards = 4;      // Warning: Do not make this greater
                                     // than or equal to the number of
                                     // elements in grojaesqueImagePropNames!
 const grojaesqueImagePropNames: readonly string[] = [
-  "transparency",
-  "blueVsYellow",
-  "greenVsRed",
-  "bAndYVsGandR",
+  "Transp",
+  "B vs Y",
+  "G vs R",
+  "B&Y vs G&R",
 ];
 const canvasWidth = 300;
 const canvasHeight = 300;
@@ -65,7 +65,7 @@ const draw = (context: CanvasRenderingContext2D) => {
 
 // MySlider: function component interface to the MDBRange component
 function MySlider( props:MySliderProps ) {
-  const sliderLabel = grojaesqueImagePropNames[props.sliderNo];
+  const sliderLabel = grojaesqueImagePropNames[props.sliderNo] + ": " +  props.sliderVal;
   const sliderId = "myslider-" + Number(props.sliderNo);
 
   return (
@@ -73,10 +73,10 @@ function MySlider( props:MySliderProps ) {
       <MDBRange
         defaultValue={defaultValue}
         id={sliderId}
-        label={sliderLabel}
+        label=""
         onChange={props.onSliderChange}
       />
-      <p>sliderValue = {props.sliderVal}</p>
+      <p>{sliderLabel}</p>
     </>
   );
 }
@@ -95,12 +95,10 @@ function MySliderCard( props:MySliderProps ) {
 }
 // GrojaesqueImageRows: function component to display a grojaesque image
 function GrojaesqueImageRows( props:GrojaesqueImageProps ) {
-// const width: number = canvasWidth;
-// const height: number = canvasHeight;
-// ctx.fillStyle = "rgb(0, 0, 0)";
-// ctx.fillRect(0, 0, width, height);
+  const width = canvasWidth;
+  const height = canvasHeight;
 
-//           <canvas className="grojaesqueCanvas" width="{canvasWidth}" height="{canvasHeight}">
+//           <canvas className="grojaesque-canvas" width="{canvasWidth}" height="{canvasHeight}">
 //             <p>Oh no!  Your browser does not support basic graphics commands!!</p>
 //             <p>Oh non! Votre navigateur ne prend pas en charge les commandes graphiques de base !!</p>
 //             <p>¡Oh, no! ¡Su navegador no admite comandos básicos de gráficos!</p>
@@ -109,30 +107,17 @@ function GrojaesqueImageRows( props:GrojaesqueImageProps ) {
   return (
     <>
       <div className="row mt-4 d-flex justify-content-center">
-        <div className="col-md-12">
-          <div className="card">
-          </div>
-        </div>
-      </div>
-      <div className="row mt-4 d-flex justify-content-center">
-        <div className="col-md-3">
-          <div className="card">
+        <div className="col-md-4 align-items-center">
+          <div className="card grojaesque-canvas">
             <p>{grojaesqueImagePropNames[0]}: {props.transparency}</p>
-          </div>
-        </div>
-        <div className="col-md-3">
-          <div className="card">
             <p>{grojaesqueImagePropNames[1]}: {props.blueVsYellow}</p>
-          </div>
-        </div>
-        <div className="col-md-3">
-          <div className="card">
             <p>{grojaesqueImagePropNames[2]}: {props.greenVsRed}</p>
+            <p>{grojaesqueImagePropNames[3]}: {props.bAndYVsGandR}</p>
           </div>
         </div>
-        <div className="col-md-3">
-          <div className="card">
-            <p>{grojaesqueImagePropNames[3]}: {props.bAndYVsGandR}</p>
+        <div className="col-md-8">
+          <div className="card grojaesque-canvas">
+            <Canvas draw={draw} width={width} height={height} />
           </div>
         </div>
       </div>
@@ -156,7 +141,7 @@ function MyContainer() {
 
   function handleChangeArrayOfNumbers( evt:ChangeEvent, col:number ) {
     const val = (evt.target as HTMLInputElement).value;
-    console.log("Value of slider in column " + col + " is now " + val);
+  // console.log("Value of slider in column " + col + " is now " + val);
     const nextValues = values.slice();
     nextValues[col] = Number(val);
     setValues(nextValues);
@@ -198,7 +183,6 @@ function MyContainer() {
           bAndYVsGandR={values[3] ?? defaultValue} />
       </div>
       <div className="row mt-4 d-flex justify-content-center">
-        <h3><code>MySliderCard</code>s</h3>
         {sliderNumberCols}
       </div>
       <div className="row mt-4 d-flex justify-content-center">
@@ -211,14 +195,8 @@ function MyContainer() {
 
 // App: this App's "mainline" component
 function App() {
-  const width = canvasWidth;
-  const height = canvasHeight;
-
   return (
     <>
-      <div>
-        <Canvas draw={draw} width={width} height={height} />
-      </div>
       <h1><span className="fst-italic">"Groja-esque"</span> Image App</h1>
       <MyContainer />
     </>
