@@ -46,19 +46,38 @@ const gridSize = 19;      // No. of squares in each row and column
 const canvasWidth = ( squareSize * gridSize ) + ( 2 * gridTopX );
 const canvasHeight = ( squareSize * gridSize ) + ( 2 * gridTopY );
 
+// ******************************************************************************************
+// globalProps: A TEMPORARY GLOBAL variable to be replaced by a Context whatever in Project 5
+// ******************************************************************************************
+const globalProps: GrojaesqueImageProps = {
+  transparency: defaultValue,
+  blueVsYellow: defaultValue,
+  greenVsRed: defaultValue,
+  bAndYVsGandR: defaultValue,
+}
+
 // draw: Add a "groja-esque" grid of blue, green, red, and yellow squares
 const draw = (context: CanvasRenderingContext2D) => {
   const width = canvasWidth;
   const height = canvasHeight;
+  const innerSquareWidth = canvasWidth - ( 2 * gridTopX );
+  const innerSquareHeight = canvasHeight - ( 2 * gridTopY );
 
-  // Paint it black
+  // Paint it all black
   context.fillStyle = "rgb(0, 0, 0)";
   context.fillRect(0, 0, width, height);
+
+  // Paint the inner square white
+  context.fillStyle = "rgb(255, 255, 255)";
+  context.fillRect(gridTopY, gridTopY, innerSquareWidth, innerSquareHeight);
 
   let squareTopX = gridTopX;
   let squareTopY = gridTopY;
   let randomColorLetter = "B";
-  
+  let transparencyPct = globalProps.transparency / 100;
+  console.log( "draw: globalProps.transparency = " + globalProps.transparency );
+  console.log( "draw: transparencyPct = " + transparencyPct );
+
   for ( let row=0; row < gridSize; row++ ) {
     squareTopY = gridTopY + (row * squareSize);
     for ( let col=0; col < gridSize; col++ ){
@@ -66,15 +85,15 @@ const draw = (context: CanvasRenderingContext2D) => {
     // console.log( "randomColorLetter = " + randomColorLetter );
       squareTopX = gridTopX + (col * squareSize);
       if ( randomColorLetter == "B" ) {
-        context.fillStyle = "rgb(0, 0, 255, 1)";
+        context.fillStyle = "rgb(0, 0, 255, " + transparencyPct + ")";
       } else if ( randomColorLetter == "G" ) {
-        context.fillStyle = "rgb(0, 255, 0, 1)";
+        context.fillStyle = "rgb(0, 255, 0, " + transparencyPct + ")";
       } else if ( randomColorLetter == "R" ) {
-        context.fillStyle = "rgb(255, 0, 0, 1)";
+        context.fillStyle = "rgb(255, 0, 0, " + transparencyPct + ")";
       } else if ( randomColorLetter == "Y" ) {
-        context.fillStyle = "rgb(255, 255, 0, 1)";
+        context.fillStyle = "rgb(255, 255, 0, " + transparencyPct + ")";
       } else {
-        context.fillStyle = "rgb(255, 255, 255, 1)";
+        context.fillStyle = "rgb(255, 255, 255, " + transparencyPct + ")";
       }
       context.fillRect( squareTopX, squareTopY, squareSize, squareSize );
     }
@@ -122,17 +141,12 @@ function MySliderCard( props:MySliderProps ) {
     </div>
   )
 }
-// GrojaesqueImageRows: function component to display a grojaesque image
-function GrojaesqueImageRows( props:GrojaesqueImageProps ) {
+// GrojaesqueImageCards: function component to display a grojaesque image
+function GrojaesqueImageCards( props:GrojaesqueImageProps ) {
   const width = canvasWidth;
   const height = canvasHeight;
+  globalProps.transparency = props.transparency;
 
-//           <canvas className="grojaesque-canvas" width="{canvasWidth}" height="{canvasHeight}">
-//             <p>Oh no!  Your browser does not support basic graphics commands!!</p>
-//             <p>Oh non! Votre navigateur ne prend pas en charge les commandes graphiques de base !!</p>
-//             <p>¡Oh, no! ¡Su navegador no admite comandos básicos de gráficos!</p>
-//             <p>Ach nein! Ihr Browser unterstützt keine grundlegenden Grafikbefehle!!</p>
-//           </canvas>
   return (
     <>
       <div className="row mt-4 d-flex justify-content-center">
@@ -205,7 +219,7 @@ function MyContainer() {
   return (
     <div className="container">
       <div className="row mt-4 d-flex justify-content-center">
-        <GrojaesqueImageRows
+        <GrojaesqueImageCards
           transparency={values[0] ?? defaultValue}
           blueVsYellow={values[1] ?? defaultValue}
           greenVsRed={values[2] ?? defaultValue}
