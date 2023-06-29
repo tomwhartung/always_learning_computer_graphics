@@ -18,10 +18,10 @@ interface MySliderProps {
   sliderVal: number;
 }
 interface GrojaesqueImageProps {
-  transparency: number;
-  blueVsYellow: number;
-  greenVsRed: number;
-  bAndYVsGandR: number;
+  opacityPct: number;        // [0.0 .. 1.0]
+  blueVsYellow: number;      // [0 .. 100]
+  greenVsRed: number;        // [0 .. 100]
+  bAndYVsGandR: number;      // [0 .. 100]
 }
 interface MySliderResultProps {
   slNo: number;
@@ -34,7 +34,7 @@ const numberOfSliderCards = 4;      // Warning: Do not make this greater
                                     // than or equal to the number of
                                     // elements in grojaesqueImagePropNames!
 const grojaesqueImagePropNames: readonly string[] = [
-  "Transp",
+  "Opacity%",
   "B vs Y",
   "G vs R",
   "B&Y vs G&R",
@@ -50,7 +50,7 @@ const canvasHeight = ( squareSize * gridSize ) + ( 2 * gridTopY );
 // globalProps: A TEMPORARY GLOBAL variable to be replaced by a Context whatever in Project 5
 // ******************************************************************************************
 const globalProps: GrojaesqueImageProps = {
-  transparency: defaultValue,
+  opacityPct: valueToOpacityPct( defaultValue ),
   blueVsYellow: defaultValue,
   greenVsRed: defaultValue,
   bAndYVsGandR: defaultValue,
@@ -74,9 +74,9 @@ const draw = (context: CanvasRenderingContext2D) => {
   let squareTopX = gridTopX;
   let squareTopY = gridTopY;
   let randomColorLetter = "B";
-  let transparencyPct = globalProps.transparency / 100;
-  console.log( "draw: globalProps.transparency = " + globalProps.transparency );
-  console.log( "draw: transparencyPct = " + transparencyPct );
+  const opacityPct = globalProps.opacityPct;
+  console.log( "draw: globalProps.opacityPct = " + globalProps.opacityPct );
+  console.log( "draw: opacityPct = " + opacityPct );
 
   for ( let row=0; row < gridSize; row++ ) {
     squareTopY = gridTopY + (row * squareSize);
@@ -85,15 +85,15 @@ const draw = (context: CanvasRenderingContext2D) => {
     // console.log( "randomColorLetter = " + randomColorLetter );
       squareTopX = gridTopX + (col * squareSize);
       if ( randomColorLetter == "B" ) {
-        context.fillStyle = "rgb(0, 0, 255, " + transparencyPct + ")";
+        context.fillStyle = "rgba(0, 0, 255, " + opacityPct + ")";
       } else if ( randomColorLetter == "G" ) {
-        context.fillStyle = "rgb(0, 255, 0, " + transparencyPct + ")";
+        context.fillStyle = "rgba(0, 255, 0, " + opacityPct + ")";
       } else if ( randomColorLetter == "R" ) {
-        context.fillStyle = "rgb(255, 0, 0, " + transparencyPct + ")";
+        context.fillStyle = "rgba(255, 0, 0, " + opacityPct + ")";
       } else if ( randomColorLetter == "Y" ) {
-        context.fillStyle = "rgb(255, 255, 0, " + transparencyPct + ")";
+        context.fillStyle = "rgba(255, 255, 0, " + opacityPct + ")";
       } else {
-        context.fillStyle = "rgb(255, 255, 255, " + transparencyPct + ")";
+        context.fillStyle = "rgb(255, 255, 255, " + opacityPct + ")";
       }
       context.fillRect( squareTopX, squareTopY, squareSize, squareSize );
     }
@@ -141,18 +141,23 @@ function MySliderCard( props:MySliderProps ) {
     </div>
   )
 }
+// valueToOpacityPct: convert a slider value [0 - 100] to a percentage of opacity [0.0 - 1.00]
+function valueToOpacityPct( value: number ) : number {
+  const opacityPct = value / 100;
+  return ( opacityPct );
+}
 // GrojaesqueImageCards: function component to display a grojaesque image
 function GrojaesqueImageCards( props:GrojaesqueImageProps ) {
   const width = canvasWidth;
   const height = canvasHeight;
-  globalProps.transparency = props.transparency;
+  globalProps.opacityPct = valueToOpacityPct( props.opacityPct );
 
   return (
     <>
       <div className="row mt-4 d-flex justify-content-center">
         <div className="col-md-4 align-items-center">
           <div className="card grojaesque-canvas">
-            <p>{grojaesqueImagePropNames[0]}: {props.transparency}</p>
+            <p>{grojaesqueImagePropNames[0]}: {props.opacityPct}</p>
             <p>{grojaesqueImagePropNames[1]}: {props.blueVsYellow}</p>
             <p>{grojaesqueImagePropNames[2]}: {props.greenVsRed}</p>
             <p>{grojaesqueImagePropNames[3]}: {props.bAndYVsGandR}</p>
@@ -220,7 +225,7 @@ function MyContainer() {
     <div className="container">
       <div className="row mt-4 d-flex justify-content-center">
         <GrojaesqueImageCards
-          transparency={values[0] ?? defaultValue}
+          opacityPct={values[0] ?? valueToOpacityPct(defaultValue)}
           blueVsYellow={values[1] ?? defaultValue}
           greenVsRed={values[2] ?? defaultValue}
           bAndYVsGandR={values[3] ?? defaultValue} />
