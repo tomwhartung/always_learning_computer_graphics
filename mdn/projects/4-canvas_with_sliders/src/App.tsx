@@ -17,11 +17,19 @@ interface MySliderProps {
   onSliderChange: (evt: ChangeEvent<Element>) => void;
   sliderVal: number;
 }
+// GrojaesqueImageProps: values that come from the sliders
 interface GrojaesqueImageProps {
-  opacityPct: number;        // [0.0 .. 1.0]
+  opacityValue: number;      // [0 .. 100]
   blueVsYellow: number;      // [0 .. 100]
   greenVsRed: number;        // [0 .. 100]
   bAndYVsGandR: number;      // [0 .. 100]
+}
+// GrojaesqueImagePercents: slider values as percentages, used to create the image
+interface GrojaesqueImagePercents {
+  opacityPercent: number;    // [0.0 .. 1.0]
+  blueVsYellow: number;      // [0.0 .. 1.0]
+  greenVsRed: number;        // [0.0 .. 1.0]
+  bAndYVsGandR: number;      // [0.0 .. 1.0]
 }
 interface MySliderResultProps {
   slNo: number;
@@ -49,8 +57,8 @@ const canvasHeight = ( squareSize * gridSize ) + ( 2 * gridTopY );
 // ******************************************************************************************
 // globalProps: A TEMPORARY GLOBAL variable to be replaced by a Context whatever in Project 5
 // ******************************************************************************************
-const globalProps: GrojaesqueImageProps = {
-  opacityPct: valueToOpacityPct( defaultValue ),
+const globalProps: GrojaesqueImagePercents = {
+  opacityPercent: valueToPct( defaultValue ),
   blueVsYellow: defaultValue,
   greenVsRed: defaultValue,
   bAndYVsGandR: defaultValue,
@@ -74,9 +82,9 @@ const draw = (context: CanvasRenderingContext2D) => {
   let squareTopX = gridTopX;
   let squareTopY = gridTopY;
   let randomColorLetter = "B";
-  const opacityPct = globalProps.opacityPct;
-  console.log( "draw: globalProps.opacityPct = " + globalProps.opacityPct );
-  console.log( "draw: opacityPct = " + opacityPct );
+  const opacityPercent = globalProps.opacityPercent;
+  console.log( "draw: globalProps.opacityPercent = " + globalProps.opacityPercent );
+  console.log( "draw: opacityPercent = " + opacityPercent );
 
   for ( let row=0; row < gridSize; row++ ) {
     squareTopY = gridTopY + (row * squareSize);
@@ -85,15 +93,15 @@ const draw = (context: CanvasRenderingContext2D) => {
     // console.log( "randomColorLetter = " + randomColorLetter );
       squareTopX = gridTopX + (col * squareSize);
       if ( randomColorLetter == "B" ) {
-        context.fillStyle = "rgba(0, 0, 255, " + opacityPct + ")";
+        context.fillStyle = "rgba(0, 0, 255, " + opacityPercent + ")";
       } else if ( randomColorLetter == "G" ) {
-        context.fillStyle = "rgba(0, 255, 0, " + opacityPct + ")";
+        context.fillStyle = "rgba(0, 255, 0, " + opacityPercent + ")";
       } else if ( randomColorLetter == "R" ) {
-        context.fillStyle = "rgba(255, 0, 0, " + opacityPct + ")";
+        context.fillStyle = "rgba(255, 0, 0, " + opacityPercent + ")";
       } else if ( randomColorLetter == "Y" ) {
-        context.fillStyle = "rgba(255, 255, 0, " + opacityPct + ")";
+        context.fillStyle = "rgba(255, 255, 0, " + opacityPercent + ")";
       } else {
-        context.fillStyle = "rgb(255, 255, 255, " + opacityPct + ")";
+        context.fillStyle = "rgb(255, 255, 255, " + opacityPercent + ")";
       }
       context.fillRect( squareTopX, squareTopY, squareSize, squareSize );
     }
@@ -141,23 +149,23 @@ function MySliderCard( props:MySliderProps ) {
     </div>
   )
 }
-// valueToOpacityPct: convert a slider value [0 - 100] to a percentage of opacity [0.0 - 1.00]
-function valueToOpacityPct( value: number ) : number {
-  const opacityPct = value / 100;
-  return ( opacityPct );
+// valueToPct: convert a slider value [0 - 100] to a percentage of opacity [0.0 - 1.00]
+function valueToPct( value: number ) : number {
+  const percent = value / 100;
+  return ( percent );
 }
 // GrojaesqueImageCards: function component to display a grojaesque image
 function GrojaesqueImageCards( props:GrojaesqueImageProps ) {
   const width = canvasWidth;
   const height = canvasHeight;
-  globalProps.opacityPct = valueToOpacityPct( props.opacityPct );
+  globalProps.opacityPercent = valueToPct( props.opacityValue );
 
   return (
     <>
       <div className="row mt-4 d-flex justify-content-center">
         <div className="col-md-4 align-items-center">
           <div className="card grojaesque-canvas">
-            <p>{grojaesqueImagePropNames[0]}: {props.opacityPct}</p>
+            <p>{grojaesqueImagePropNames[0]}: {props.opacityValue}</p>
             <p>{grojaesqueImagePropNames[1]}: {props.blueVsYellow}</p>
             <p>{grojaesqueImagePropNames[2]}: {props.greenVsRed}</p>
             <p>{grojaesqueImagePropNames[3]}: {props.bAndYVsGandR}</p>
@@ -225,7 +233,7 @@ function MyContainer() {
     <div className="container">
       <div className="row mt-4 d-flex justify-content-center">
         <GrojaesqueImageCards
-          opacityPct={values[0] ?? valueToOpacityPct(defaultValue)}
+          opacityValue={values[0] ?? valueToPct(defaultValue)}
           blueVsYellow={values[1] ?? defaultValue}
           greenVsRed={values[2] ?? defaultValue}
           bAndYVsGandR={values[3] ?? defaultValue} />
