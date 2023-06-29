@@ -185,7 +185,7 @@ Which is old!  Quoting from this page:
 > These docs are old and won’t be updated. Go to react.dev for the new React docs.
 > PropTypes aren’t commonly used in modern React. Use TypeScript for static type checking.
 
-### 2.4.1.2. Fixing the Error!
+#### 2.4.1.2. Fixing the Error!
 
 **Commenting out the references to `propTypes` fixes the error.**
 
@@ -265,13 +265,13 @@ const draw = context => {
 };
 ```
 
-### 2.6.1.1. Get an Error
+#### 2.6.1.1. Get an Error
 
 This causes the following error:
 
 - Parameter 'context' implicitly has an 'any' type.
 
-### 2.6.1.2. Fix the Error
+#### 2.6.1.2. Fix the Error
 
 - [x] Fix 1: declare `context` to be an `any` type
   - `const draw = (context: any) => {`
@@ -289,13 +289,13 @@ This causes the following error:
       </div>
 ```
 
-### 2.6.2.1. Get an Error
+#### 2.6.2.1. Get an Error
 
 This causes the following error:
 
 - Could not find a declaration file for module './Canvas.jsx'. '... Canvas.jsx' implicitly has an 'any' type.
 
-### 2.6.2.2. [Try to] Fix the Error ...
+#### 2.6.2.2. [Try to] Fix the Error ...
 
 Looked at and tried several solutions:
 
@@ -310,7 +310,7 @@ Looked at and tried several solutions:
 
 There is a common thread to these, and I am leaving a couple of files here as evidence of this.
 
-### 2.6.2.3. ... Or Not?
+#### 2.6.2.3. ... Or Not?
 
 I tried to fix the error, but the app runs anyway, and I am ready to move on!
 
@@ -351,7 +351,7 @@ shows how to "fix" this error by adding the line marked with a `+` in the follow
    },
 ```
 
-### 2.6.4.1. Check for Problems and Update github
+#### 2.6.4.1. Check for Problems and Update github
 
 This "fix" made the error go away, so I updated github and am moving on.
 
