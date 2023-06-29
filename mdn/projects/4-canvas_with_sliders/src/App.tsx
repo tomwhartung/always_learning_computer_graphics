@@ -47,6 +47,13 @@ const grojaesqueImagePropNames: readonly string[] = [
   "G vs R",
   "B&Y vs G&R",
 ];
+const colorLetters = [
+  "B",   // Blue
+  "G",   // Green
+  "R",   // Red
+  "Y",   // Yellow
+  "X",   // Invalid!
+];
 const gridTopX = 10;      // X location of top left corner of grid
 const gridTopY = 10;      // Y location of top left corner of grid
 const squareSize = 15;    // Size of each square
@@ -83,8 +90,8 @@ const draw = (context: CanvasRenderingContext2D) => {
   let squareTopY = gridTopY;
   let randomColorLetter = "B";
   const opacityPercent = globalProps.opacityPercent;
-  console.log( "draw: globalProps.opacityPercent = " + globalProps.opacityPercent );
-  console.log( "draw: opacityPercent = " + opacityPercent );
+// console.log( "draw: globalProps.opacityPercent = " + globalProps.opacityPercent );
+// console.log( "draw: opacityPercent = " + opacityPercent );
 
   for ( let row=0; row < gridSize; row++ ) {
     squareTopY = gridTopY + (row * squareSize);
@@ -110,11 +117,28 @@ const draw = (context: CanvasRenderingContext2D) => {
 
 // getRandomPrimaryColor: return a single character, "B", "G", "R", or "Y"
 function getRandomPrimaryColor() {
-  const min = 0;
-  const max = 4;
-  const colorLetters = [ "B", "G", "R", "Y", ];
-  const randomInt = Math.floor(Math.random() * (max - min) + min);
-  const randomColorLetter = colorLetters[randomInt];
+  const blueVsYellowPercent = globalProps.blueVsYellowPercent;
+  const greenVsRedPercent = globalProps.greenVsRedPercent;
+  const bAndYVsGandRPercent = globalProps.bAndYVsGandRPercent;
+  let randomFloat = Math.random();
+  let randomColorLetter = colorLetters[4];  // default is INVALID!
+
+  if ( randomFloat <= bAndYVsGandRPercent ) {
+    randomFloat = Math.random();
+    if ( randomFloat <= blueVsYellowPercent ) {
+      randomColorLetter = colorLetters[0];
+    } else {
+      randomColorLetter = colorLetters[3];
+    }
+  } else {
+    randomFloat = Math.random();
+    if ( randomFloat <= greenVsRedPercent ) {
+      randomColorLetter = colorLetters[1];
+    } else {
+      randomColorLetter = colorLetters[2];
+    }
+  }
+
   return randomColorLetter;
 }
 
@@ -158,7 +182,12 @@ function valueToPct( value: number ) : number {
 function GrojaesqueImageCards( props:GrojaesqueImageProps ) {
   const width = canvasWidth;
   const height = canvasHeight;
+
+  // **TEMPORARILY** Save the raw slider values as percentages in a **GLOBAL OBJECT**
   globalProps.opacityPercent = valueToPct( props.opacityValue );
+  globalProps.blueVsYellowPercent = valueToPct( props.blueVsYellowValue );
+  globalProps.greenVsRedPercent = valueToPct( props.greenVsRedValue );
+  globalProps.bAndYVsGandRPercent = valueToPct( props.bAndYVsGandRValue );
 
   return (
     <>
