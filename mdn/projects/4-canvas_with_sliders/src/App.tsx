@@ -19,17 +19,17 @@ interface MySliderProps {
 }
 // GrojaesqueImageProps: values that come from the sliders
 interface GrojaesqueImageProps {
-  opacityValue: number;      // [0 .. 100]
-  blueVsYellow: number;      // [0 .. 100]
-  greenVsRed: number;        // [0 .. 100]
-  bAndYVsGandR: number;      // [0 .. 100]
+  opacityValue: number;           // [0 .. 100]
+  blueVsYellowValue: number;      // [0 .. 100]
+  greenVsRedValue: number;        // [0 .. 100]
+  bAndYVsGandRValue: number;      // [0 .. 100]
 }
 // GrojaesqueImagePercents: slider values as percentages, used to create the image
 interface GrojaesqueImagePercents {
-  opacityPercent: number;    // [0.0 .. 1.0]
-  blueVsYellow: number;      // [0.0 .. 1.0]
-  greenVsRed: number;        // [0.0 .. 1.0]
-  bAndYVsGandR: number;      // [0.0 .. 1.0]
+  opacityPercent: number;           // [0.0 .. 1.0]
+  blueVsYellowPercent: number;      // [0.0 .. 1.0]
+  greenVsRedPercent: number;        // [0.0 .. 1.0]
+  bAndYVsGandRPercent: number;      // [0.0 .. 1.0]
 }
 interface MySliderResultProps {
   slNo: number;
@@ -59,9 +59,9 @@ const canvasHeight = ( squareSize * gridSize ) + ( 2 * gridTopY );
 // ******************************************************************************************
 const globalProps: GrojaesqueImagePercents = {
   opacityPercent: valueToPct( defaultValue ),
-  blueVsYellow: defaultValue,
-  greenVsRed: defaultValue,
-  bAndYVsGandR: defaultValue,
+  blueVsYellowPercent: valueToPct( defaultValue ),
+  greenVsRedPercent: valueToPct( defaultValue ),
+  bAndYVsGandRPercent: valueToPct( defaultValue ),
 }
 
 // draw: Add a "groja-esque" grid of blue, green, red, and yellow squares
@@ -166,9 +166,9 @@ function GrojaesqueImageCards( props:GrojaesqueImageProps ) {
         <div className="col-md-4 align-items-center">
           <div className="card grojaesque-canvas">
             <p>{grojaesqueImagePropNames[0]}: {props.opacityValue}</p>
-            <p>{grojaesqueImagePropNames[1]}: {props.blueVsYellow}</p>
-            <p>{grojaesqueImagePropNames[2]}: {props.greenVsRed}</p>
-            <p>{grojaesqueImagePropNames[3]}: {props.bAndYVsGandR}</p>
+            <p>{grojaesqueImagePropNames[1]}: {props.blueVsYellowValue}</p>
+            <p>{grojaesqueImagePropNames[2]}: {props.greenVsRedValue}</p>
+            <p>{grojaesqueImagePropNames[3]}: {props.bAndYVsGandRValue}</p>
           </div>
         </div>
         <div className="col-md-8">
@@ -233,10 +233,10 @@ function MyContainer() {
     <div className="container">
       <div className="row mt-4 d-flex justify-content-center">
         <GrojaesqueImageCards
-          opacityValue={values[0] ?? valueToPct(defaultValue)}
-          blueVsYellow={values[1] ?? defaultValue}
-          greenVsRed={values[2] ?? defaultValue}
-          bAndYVsGandR={values[3] ?? defaultValue} />
+          opacityValue={values[0] ?? defaultValue}
+          blueVsYellowValue={values[1] ?? defaultValue}
+          greenVsRedValue={values[2] ?? defaultValue}
+          bAndYVsGandRValue={values[3] ?? defaultValue} />
       </div>
       <div className="row mt-4 d-flex justify-content-center">
         {sliderNumberCols}
