@@ -31,10 +31,6 @@ interface GrojaesqueImagePercents {
   greenVsRedPercent: number;        // [0.0 .. 1.0]
   bAndYVsGandRPercent: number;      // [0.0 .. 1.0]
 }
-interface MySliderResultProps {
-  slNo: number;
-  slVal: number;
-}
 
 // Important constants
 const defaultValue = 50;
@@ -209,16 +205,6 @@ function GrojaesqueImageCards( props:GrojaesqueImageProps ) {
     </>
   );
 }
-// MySliderResultsCard: function component to display the slider values
-function MySliderResultsCard( props:MySliderResultProps ) {
-  return (
-    <>
-      <div className="card">
-        <p>{grojaesqueImagePropNames[props.slNo]} slider = {props.slVal}</p>
-      </div>
-    </>
-  );
-}
 
 // MyContainer: function component containing an MDB container
 function MyContainer() {
@@ -245,18 +231,6 @@ function MyContainer() {
       </div>
     );
   }
-  // Construct markup for a set of columns containing MySliderResultsCards
-  const sliderResultCols = [];
-  for ( let col = 0; col < numberOfSliderCards; col++ ) {
-    sliderResultCols.push(
-      <div key={col} className="col-md-3">
-        <MySliderResultsCard
-         slNo={col}
-         slVal={values[col] ?? defaultValue}
-        />
-      </div>
-    );
-  }
 
   return (
     <div className="container">
@@ -269,10 +243,6 @@ function MyContainer() {
       </div>
       <div className="row mt-4 d-flex justify-content-center">
         {sliderNumberCols}
-      </div>
-      <div className="row mt-4 d-flex justify-content-center">
-        <h3><code>MySliderResultsCard</code>s - Obsolete??</h3>
-        {sliderResultCols}
       </div>
     </div>
   )
