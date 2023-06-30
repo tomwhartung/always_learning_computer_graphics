@@ -235,3 +235,14 @@ App works ok - and looks much better* - and VSCode and lint still report just on
 
 (*) Actually running 'npm run lint` reports a new error in `Canvas.tsx`, but I am not using that file, yet.
 
+# 4. Update Code So That the Image Reflects the Values of the Four Sliders
+
+- [x] 1. Migrate code from `scripts.js` in Project 1 to `src/App.tsx` in Project 4
+  - [x] 1.1. Create a `GrojaesqueImageCard` component with code for random image
+  - [x] 1.2. Update names of variables to make sense with our goal
+- [x] 2. Update to use sliders to set the ranges used for the random colors
+  - [x] 2.1. First slider: sets the percentage of opacity - the `opacityPct`
+  - [x] 2.2. Second slider: sets amount of Blue versus Yellow
+  - [x] 2.3. Third slider: sets amount of Green versus Red
+  - [x] 2.4. Fourth slider: sets amount of Blue and Yellow versus Green and Red
+
