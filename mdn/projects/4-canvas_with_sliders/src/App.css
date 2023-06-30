@@ -37,6 +37,14 @@
   padding: 2em;
 }
 
-.read-the-docs {
-  color: #888;
+/* My CusTOMizations
+ * -----------------
+ */
+code {
+  color: darkblue;
+  font: Courier;
+}
+
+.grojaesque-canvas {
+  border: 4px solid black;
 }
