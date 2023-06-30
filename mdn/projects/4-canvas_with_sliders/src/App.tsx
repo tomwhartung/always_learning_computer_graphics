@@ -203,7 +203,7 @@ function FixedSizeImageCards( props:GrojaesqueImageProps ) {
   globalProps.bAndYVsGandRPercent = valueToPct( props.bAndYVsGandRValue );
 
   function handleImageClick(event: React.MouseEvent<HTMLElement>) {
-    const rect = event.target.getBoundingClientRect();
+    const rect = (event.target as HTMLElement).getBoundingClientRect();
     const x = Math.round( event.clientX - rect.left );
     const y = Math.round( event.clientY - rect.top );
     console.log( "Click on the FixedSizeImage at (" + x + ", " + y + ")" );
@@ -285,11 +285,10 @@ function DFlexImageCards( props:GrojaesqueImageProps ) {
   globalProps.bAndYVsGandRPercent = valueToPct( props.bAndYVsGandRValue );
 
   function handleImageClick(event: React.MouseEvent<HTMLElement>) {
-    const rect = event.target.getBoundingClientRect();
+    const rect = (event.target as HTMLElement).getBoundingClientRect();
     const x = Math.round( event.clientX - rect.left );
     const y = Math.round( event.clientY - rect.top );
     console.log( "Click on resizable image at (" + x + ", " + y + ")" );
-//   console.log( "Click on resizable 'containered d-flex' image " );
   }
 
   return (
