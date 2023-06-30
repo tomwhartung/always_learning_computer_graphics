@@ -204,9 +204,38 @@ function FixedSizeImageCards( props:GrojaesqueImageProps ) {
 
   function handleImageClick(event: React.MouseEvent<HTMLElement>) {
     const rect = (event.target as HTMLElement).getBoundingClientRect();
-    const x = Math.round( event.clientX - rect.left );
-    const y = Math.round( event.clientY - rect.top );
-    console.log( "Click on the FixedSizeImage at (" + x + ", " + y + ")" );
+    const pixelX = Math.round( event.clientX - rect.left );
+    const pixelY = Math.round( event.clientY - rect.top );
+    console.log( "Click on the FixedSizeImage at pixel coords (" + pixelX + ", " + pixelY + ")" );
+    logSquareCoords( pixelX, pixelY );
+  }
+  function logSquareCoords( pixelX: number, pixelY: number ) {
+    let squareX = 0;
+    let squareY = 0;
+  // const diffX = pixelX - gridTopX;
+  // const diffY = pixelY - gridTopY;
+  // console.log( "(diffX, diffY) = (" + diffX + ", " + diffY + ")" );
+    squareX = Math.floor( ( pixelX - gridTopX ) / squareSize );
+    squareY = Math.floor( ( pixelY - gridTopY ) / squareSize );
+    if ( squareX < 0 && squareY < 0 ) {
+      console.log( "You clicked on the upper-left corner, not on a square" );
+    } else if ( squareX < 0 && squareY >= gridSize) {
+      console.log( "You clicked on the lower-left corner, not on a square" );
+    } else if ( squareX >= gridSize && squareY < 0 ) {
+      console.log( "You clicked on the upper-right corner, not on a square" );
+    } else if ( squareX >= gridSize && squareY >= gridSize) {
+      console.log( "You clicked on the lower-right corner, not on a square" );
+    } else if ( squareX < 0 ) {
+      console.log( "You clicked on the left-side border, not on a square" );
+    } else if ( squareY < 0 ) {
+      console.log( "You clicked on the upper border, not on a square" );
+    } else if ( squareX >= gridSize ) {
+      console.log( "You clicked on the right-side border, not on a square" );
+    } else if ( squareY >= gridSize ) {
+      console.log( "You clicked on the lower border, not on a square" );
+    } else {
+      console.log( "Pixel coords correspond to squareCoords (" + squareX + ", " + squareY + ")" );
+    }
   }
 
   return (
@@ -286,9 +315,9 @@ function DFlexImageCards( props:GrojaesqueImageProps ) {
 
   function handleImageClick(event: React.MouseEvent<HTMLElement>) {
     const rect = (event.target as HTMLElement).getBoundingClientRect();
-    const x = Math.round( event.clientX - rect.left );
-    const y = Math.round( event.clientY - rect.top );
-    console.log( "Click on resizable image at (" + x + ", " + y + ")" );
+    const pixelX = Math.round( event.clientX - rect.left );
+    const pixelY = Math.round( event.clientY - rect.top );
+    console.log( "Click on resizable image at (" + pixelX + ", " + pixelY + ")" );
   }
 
   return (
