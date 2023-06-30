@@ -246,3 +246,13 @@ App works ok - and looks much better* - and VSCode and lint still report just on
   - [x] 2.3. Third slider: sets amount of Green versus Red
   - [x] 2.4. Fourth slider: sets amount of Blue and Yellow versus Green and Red
 
+# 5. Figure out How to Capture Clicks on the Image
+
+- [x] 1. Update the code to capture clicks on the image
+  - **Note:** The (x, y) values are only usable when the image is a fixed size
+  - That is, the image must adhere to the specified `width` and `height`
+  - **Specifically, this means the image cannot be a child element of an MDB `card`**
+- [x] 2. Get the x and y coords of click location from the event and log (pixelX, pixelY) to the console
+- [x] 3. Calculate location of square in grid and log (squareX, squareY) to the console
+  - [x] 3.1. Extra credit: log when user clicks on the border, or on one of the corners of the border
+
