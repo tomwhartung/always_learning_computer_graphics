@@ -1,11 +1,10 @@
 import React from 'react';
 
-// import PropTypes from 'prop-types'; // Added in Step 4
+// import PropTypes from 'prop-types';
 
-const Canvas = ( {draw, width, height} ) => {   // Changed in Steps 4 and 5
-  const canvas = React.useRef();                // Added useRef in Step 2
+const Canvas = ( {draw, onClick, width, height} ) => {
+  const canvas = React.useRef();
 
-  // Added useEffect in Step 3:
   React.useEffect(() => {
     const context = canvas.current.getContext('2d');
     draw(context); // Added in Step 4
@@ -13,10 +12,16 @@ const Canvas = ( {draw, width, height} ) => {   // Changed in Steps 4 and 5
 
   return (
     <canvas
-      ref={canvas}       // Added ref in Step 2
-      width={width}      // Added width prop in Step 5
-      height={height}    // Added height prop in Step 5
-    />
+      ref={canvas}
+      onClick={onClick}
+      width={width}
+      height={height}
+    >
+      <p>Oh no!  Your browser does not support basic graphics commands!!</p>
+      <p>Oh non! Votre navigateur ne prend pas en charge les commandes graphiques de base !!</p>
+      <p>¡Oh, no! ¡Su navegador no admite comandos básicos de gráficos!</p>
+      <p>Ach nein! Ihr Browser unterstützt keine grundlegenden Grafikbefehle!!</p>
+    </canvas>
   )
 };
 
