@@ -202,7 +202,7 @@ function FixedSizeImageCards( props:GrojaesqueImageProps ) {
   globalProps.greenVsRedPercent = valueToPct( props.greenVsRedValue );
   globalProps.bAndYVsGandRPercent = valueToPct( props.bAndYVsGandRValue );
 
-  function handleImageClick(event: MouseEvent) {
+  function handleImageClick(event: React.MouseEvent<HTMLElement>) {
     const rect = event.target.getBoundingClientRect();
     const x = Math.round( event.clientX - rect.left );
     const y = Math.round( event.clientY - rect.top );
@@ -233,8 +233,6 @@ function FixedSizeImageCards( props:GrojaesqueImageProps ) {
 // FixedContainer: function component containing an MDB container
 function FixedContainer() {
   const [values, setValues] = useState([defaultValue]);
-  const width = canvasWidth;
-  const height = canvasHeight;
 
   function handleChangeArrayOfNumbers( evt:ChangeEvent, col:number ) {
     const val = (evt.target as HTMLInputElement).value;
@@ -260,7 +258,7 @@ function FixedContainer() {
 
   return (
     <div className="container">
-      <h3>FixedContainer</h3>
+      <h4>FixedContainer:</h4>
       <div className="row mt-4">
         {sliderNumberCols}
       </div>
@@ -286,7 +284,7 @@ function DFlexImageCards( props:GrojaesqueImageProps ) {
   globalProps.greenVsRedPercent = valueToPct( props.greenVsRedValue );
   globalProps.bAndYVsGandRPercent = valueToPct( props.bAndYVsGandRValue );
 
-  function handleImageClick(event: MouseEvent) {
+  function handleImageClick(event: React.MouseEvent<HTMLElement>) {
     const rect = event.target.getBoundingClientRect();
     const x = Math.round( event.clientX - rect.left );
     const y = Math.round( event.clientY - rect.top );
@@ -347,7 +345,7 @@ function DFlexContainer() {
 
   return (
     <div className="container">
-      <h3>DFlexContainer</h3>
+      <h4>DFlexContainer:</h4>
       <div className="row mt-4 d-flex justify-content-center">
         {sliderNumberCols}
       </div>
@@ -364,30 +362,10 @@ function DFlexContainer() {
 
 // App: this App's "mainline" component
 function App() {
-  const width = canvasWidth;
-  const height = canvasHeight;
-
-  function handleImageClick(event: MouseEvent) {
-    const rect = event.target.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-    console.log( "Click on the Image in App() at x = " + x + " and y = " + y + "!" );
-  }
-
   return (
     <>
-      <h3><span className="fst-italic">"Groja-esque"</span> Image in App()</h3>
-      <Canvas
-        draw={draw}
-        onClick={handleImageClick}
-        width={width}
-        height={height} />
-      <hr />
-      <hr />
-      <hr />
+      <h2>Fixed-Sized and D-Flex <span className="fst-italic">"Groja-esque"</span> Images</h2>
       <FixedContainer />
-      <hr />
-      <hr />
       <hr />
       <DFlexContainer />
     </>
