@@ -36,12 +36,19 @@ interface GrojaesqueImagePercents {
 const defaultValue = 50;
 const numberOfSliderCards = 4;      // Warning: Do not make this greater
                                     // than or equal to the number of
-                                    // elements in grojaesqueImagePropNames!
-const grojaesqueImagePropNames: readonly string[] = [
-  "Opacity%",
+                                    // elements in grojaesqueImagePropNames
+                                    // and grojaesqueImagePropLabels
+const grojaesqueImagePropLabels: readonly string[] = [
+  "Opacity",
   "B vs Y",
   "G vs R",
   "B&Y vs G&R",
+];
+const grojaesqueImagePropNames: readonly string[] = [
+  "Opacity",
+  "Y vs B",
+  "R vs G",
+  "G&R vs B&Y",
 ];
 const colorLetters = [
   "B",   // Blue
@@ -56,6 +63,7 @@ const squareSize = 15;    // Size of each square
 const gridSize = 19;      // No. of squares in each row and column
 const canvasWidth = ( squareSize * gridSize ) + ( 2 * gridTopX );
 const canvasHeight = ( squareSize * gridSize ) + ( 2 * gridTopY );
+console.log( "canvasWidth = " + canvasWidth + ", canvasHeight = " + canvasHeight );
 
 // ******************************************************************************************
 // globalProps: A TEMPORARY GLOBAL variable to be replaced by a Context whatever in Project 5
@@ -111,6 +119,12 @@ const draw = (context: CanvasRenderingContext2D) => {
   }
 };
 
+// valueToPct: convert a slider value [0 - 100] to a percentage of opacity [0.0 - 1.00]
+function valueToPct( value: number ) : number {
+  const percent = value / 100;
+  return ( percent );
+}
+
 // getRandomPrimaryColor: return a single character, "B", "G", "R", or "Y"
 function getRandomPrimaryColor() {
   const blueVsYellowPercent = globalProps.blueVsYellowPercent;
@@ -141,8 +155,15 @@ function getRandomPrimaryColor() {
 
 // MySlider: function component interface to the MDBRange component
 function MySlider( props:MySliderProps ) {
-  const sliderLabel = grojaesqueImagePropNames[props.sliderNo] + ": " +  props.sliderVal;
+  const sliderOppositeValue = 100 - props.sliderVal;
   const sliderId = "myslider-" + Number(props.sliderNo);
+  let sliderLabel = sliderOppositeValue + "% " + grojaesqueImagePropNames[props.sliderNo] + ": " + props.sliderVal + "%";
+
+  if ( props.sliderNo == 0 ) {
+    sliderLabel = grojaesqueImagePropNames[props.sliderNo] + ": " +  props.sliderVal;
+// } else {
+//   const sliderLabel = sliderOppositeValue + grojaesqueImagePropNames[props.sliderNo] + ": " +  props.sliderVal;
+  }
 
   return (
     <>
@@ -169,13 +190,9 @@ function MySliderCard( props:MySliderProps ) {
     </div>
   )
 }
-// valueToPct: convert a slider value [0 - 100] to a percentage of opacity [0.0 - 1.00]
-function valueToPct( value: number ) : number {
-  const percent = value / 100;
-  return ( percent );
-}
-// GrojaesqueImageCards: function component to display a grojaesque image
-function GrojaesqueImageCards( props:GrojaesqueImageProps ) {
+
+// FixedSizeImageCards: function component to display a grojaesque image
+function FixedSizeImageCards( props:GrojaesqueImageProps ) {
   const width = canvasWidth;
   const height = canvasHeight;
 
@@ -185,20 +202,116 @@ function GrojaesqueImageCards( props:GrojaesqueImageProps ) {
   globalProps.greenVsRedPercent = valueToPct( props.greenVsRedValue );
   globalProps.bAndYVsGandRPercent = valueToPct( props.bAndYVsGandRValue );
 
+  function handleImageClick(event: MouseEvent) {
+    const rect = event.target.getBoundingClientRect();
+    const x = Math.round( event.clientX - rect.left );
+    const y = Math.round( event.clientY - rect.top );
+    console.log( "Click on the FixedSizeImage at (" + x + ", " + y + ")" );
+  }
+
+  return (
+    <>
+      <div className="row mt-4">
+        <div className="col-md-4 align-items-center">
+          <p>{grojaesqueImagePropLabels[0]}: {props.opacityValue}</p>
+          <p>{grojaesqueImagePropLabels[1]}: {props.blueVsYellowValue}</p>
+          <p>{grojaesqueImagePropLabels[2]}: {props.greenVsRedValue}</p>
+          <p>{grojaesqueImagePropLabels[3]}: {props.bAndYVsGandRValue}</p>
+        </div>
+        <div className="col-md-8">
+          <Canvas
+            draw={draw}
+            onClick={handleImageClick}
+            width={width}
+            height={height} />
+        </div>
+      </div>
+    </>
+  );
+}
+
+// FixedContainer: function component containing an MDB container
+function FixedContainer() {
+  const [values, setValues] = useState([defaultValue]);
+  const width = canvasWidth;
+  const height = canvasHeight;
+
+  function handleChangeArrayOfNumbers( evt:ChangeEvent, col:number ) {
+    const val = (evt.target as HTMLInputElement).value;
+  // console.log("Value of slider in column " + col + " is now " + val);
+    const nextValues = values.slice();
+    nextValues[col] = Number(val);
+    setValues(nextValues);
+  }
+
+  // Construct markup for a set of columns containing MySliderCards
+  const sliderNumberCols = [];
+  for ( let col = 0; col < numberOfSliderCards; col++ ) {
+    sliderNumberCols.push(
+      <div key={col} className="col-md-3">
+        <MySliderCard
+         sliderNo={col}
+         sliderVal={values[col] ?? defaultValue}
+         onSliderChange={ (evt) => handleChangeArrayOfNumbers(evt,col) }
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="container">
+      <h3>FixedContainer</h3>
+      <div className="row mt-4">
+        {sliderNumberCols}
+      </div>
+      <div className="row mt-4">
+        <FixedSizeImageCards
+          opacityValue={values[0] ?? defaultValue}
+          blueVsYellowValue={values[1] ?? defaultValue}
+          greenVsRedValue={values[2] ?? defaultValue}
+          bAndYVsGandRValue={values[3] ?? defaultValue} />
+      </div>
+    </div>
+  )
+}
+
+// DFlexImageCards: function component to display a grojaesque image
+function DFlexImageCards( props:GrojaesqueImageProps ) {
+  const width = canvasWidth;
+  const height = canvasHeight;
+
+  // **TEMPORARILY** Save the raw slider values as percentages in a **GLOBAL OBJECT**
+  globalProps.opacityPercent = valueToPct( props.opacityValue );
+  globalProps.blueVsYellowPercent = valueToPct( props.blueVsYellowValue );
+  globalProps.greenVsRedPercent = valueToPct( props.greenVsRedValue );
+  globalProps.bAndYVsGandRPercent = valueToPct( props.bAndYVsGandRValue );
+
+  function handleImageClick(event: MouseEvent) {
+    const rect = event.target.getBoundingClientRect();
+    const x = Math.round( event.clientX - rect.left );
+    const y = Math.round( event.clientY - rect.top );
+    console.log( "Click on resizable image at (" + x + ", " + y + ")" );
+//   console.log( "Click on resizable 'containered d-flex' image " );
+  }
+
   return (
     <>
       <div className="row mt-4 d-flex justify-content-center">
         <div className="col-md-4 align-items-center">
           <div className="card grojaesque-canvas">
-            <p>{grojaesqueImagePropNames[0]}: {props.opacityValue}</p>
-            <p>{grojaesqueImagePropNames[1]}: {props.blueVsYellowValue}</p>
-            <p>{grojaesqueImagePropNames[2]}: {props.greenVsRedValue}</p>
-            <p>{grojaesqueImagePropNames[3]}: {props.bAndYVsGandRValue}</p>
+            <p>{grojaesqueImagePropLabels[0]}: {props.opacityValue}</p>
+            <p>{grojaesqueImagePropLabels[1]}: {props.blueVsYellowValue}</p>
+            <p>{grojaesqueImagePropLabels[2]}: {props.greenVsRedValue}</p>
+            <p>{grojaesqueImagePropLabels[3]}: {props.bAndYVsGandRValue}</p>
           </div>
         </div>
         <div className="col-md-8">
           <div className="card grojaesque-canvas">
-            <Canvas draw={draw} width={width} height={height} />
+            <Canvas
+              draw={draw}
+              onClick={handleImageClick}
+              width={width}
+              height={height} />
           </div>
         </div>
       </div>
@@ -206,8 +319,8 @@ function GrojaesqueImageCards( props:GrojaesqueImageProps ) {
   );
 }
 
-// MyContainer: function component containing an MDB container
-function MyContainer() {
+// DFlexContainer: function component containing a "d-flex" MDB container
+function DFlexContainer() {
   const [values, setValues] = useState([defaultValue]);
 
   function handleChangeArrayOfNumbers( evt:ChangeEvent, col:number ) {
@@ -234,15 +347,16 @@ function MyContainer() {
 
   return (
     <div className="container">
+      <h3>DFlexContainer</h3>
       <div className="row mt-4 d-flex justify-content-center">
-        <GrojaesqueImageCards
+        {sliderNumberCols}
+      </div>
+      <div className="row mt-4 d-flex justify-content-center">
+        <DFlexImageCards
           opacityValue={values[0] ?? defaultValue}
           blueVsYellowValue={values[1] ?? defaultValue}
           greenVsRedValue={values[2] ?? defaultValue}
           bAndYVsGandRValue={values[3] ?? defaultValue} />
-      </div>
-      <div className="row mt-4 d-flex justify-content-center">
-        {sliderNumberCols}
       </div>
     </div>
   )
@@ -250,10 +364,32 @@ function MyContainer() {
 
 // App: this App's "mainline" component
 function App() {
+  const width = canvasWidth;
+  const height = canvasHeight;
+
+  function handleImageClick(event: MouseEvent) {
+    const rect = event.target.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    console.log( "Click on the Image in App() at x = " + x + " and y = " + y + "!" );
+  }
+
   return (
     <>
-      <h1><span className="fst-italic">"Groja-esque"</span> Image App</h1>
-      <MyContainer />
+      <h3><span className="fst-italic">"Groja-esque"</span> Image in App()</h3>
+      <Canvas
+        draw={draw}
+        onClick={handleImageClick}
+        width={width}
+        height={height} />
+      <hr />
+      <hr />
+      <hr />
+      <FixedContainer />
+      <hr />
+      <hr />
+      <hr />
+      <DFlexContainer />
     </>
   )
 }
