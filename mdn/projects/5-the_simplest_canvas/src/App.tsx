@@ -391,12 +391,26 @@ function DFlexContainer() {
 
 // App: this App's "mainline" component
 function App() {
+  const width = canvasWidth;
+  const height = canvasHeight;
+
+  function handleImageClick(event: React.MouseEvent<HTMLElement>) {
+    const rect = (event.target as HTMLElement).getBoundingClientRect();
+    const pixelX = Math.round( event.clientX - rect.left );
+    const pixelY = Math.round( event.clientY - rect.top );
+    console.log( "Someone clicked on the Canvas at (" + pixelX + ", " + pixelY + ")." );
+  }
+
   return (
     <>
-      <h2>Fixed-Sized and D-Flex <span className="fst-italic">"Groja-esque"</span> Images</h2>
-      <FixedContainer />
-      <hr />
-      <DFlexContainer />
+      <h3>The Simplest Canvas Using React</h3>
+      <div>
+        <Canvas
+          draw={draw}
+          onClick={handleImageClick}
+          width={width}
+          height={height} />
+      </div>
     </>
   )
 }
