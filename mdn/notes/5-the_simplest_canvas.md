@@ -118,10 +118,86 @@ We have seen this one before:
   - '/var/www/always_learning/always_learning_computer_graphics/mdn/projects/5-the_simplest_canvas/src/Canvas.jsx'
   - implicitly has an 'any' type.
 
+**One Question Is:** at what point does this switch to the other *"'Canvas' cannot be used as a JSX component"* error??
+
 ## 2.6. Update github
 
 The app still runs and, with the exception of the VSCode problem, which is what we are targeting
 in this project, everything looks good.
 
 - So we are checking this version in as our starting point
+
+# 3. Update Code to Draw a Simple Image on a `<canvas ...` Element
+
+## 3.1. Delete Crufty Icons
+
+We copied over our own icon, so delete the following files:
+
+```
+pwd                          # /var/www/always_learning/always_learning_computer_graphics/mdn/projects/5-the_simplest_canvas
+grep svg index.html src/*.*  # check that there are no lingering references to these files
+git rm public/vite.svg
+git rm src/assets/react.svg
+git commit -m 'Deleted crufty icons from mdn/projects/5-the_simplest_canvas .'
+```
+
+## 3.2. Delete All Code Except the Simplest Canvas From `App.tsx`
+
+- [x] Subsection 3.2.1.: add a `Canvas` element to the `App` function component
+- [x] Subsection 3.2.2.: delete as much code as possible from `App.tsx`
+
+### 3.2.1. Copy Code for One of the `Canvas` Elements Into `App()`
+
+- [x] Step 3.2.1.1. Add constants `width` and `height`
+- [x] Step 3.2.1.2. Add a simplified version of `handleImageClick`
+- [x] Step 3.2.1.3. Add a `Canvas` element
+
+#### Step 3.2.1.1 Add Constants `width` and `height`
+
+*Add* the following code to *after* the `function` definition of the `App()` function component:
+
+```
+  const width = canvasWidth;
+  const height = canvasHeight;
+```
+
+#### Step 3.2.1.2 Add a Simplified Version of `handleImageClick`
+
+*Add* the following code to *before* the `return` statement in the `App()` function component:
+
+```
+  function handleImageClick(event: React.MouseEvent<HTMLElement>) {
+    const rect = (event.target as HTMLElement).getBoundingClientRect();
+    const pixelX = Math.round( event.clientX - rect.left );
+    const pixelY = Math.round( event.clientY - rect.top );
+    console.log( "Someone clicked on the Canvas at (" + pixelX + ", " + pixelY + ")." );
+  }
+
+#### Step 3.2.1.3. Add a `Canvas` Element
+
+*Replace* the code in the `return` statement in `App()` with the code in the following code box:
+
+```
+    <>
+      <h3>The Simplest Canvas Using React</h3>
+      <div>
+        <Canvas
+          draw={draw}
+          onClick={handleImageClick}
+          width={width}
+          height={height} />
+      </div>
+    </>
+```
+
+**Note:** deleting the markup referencing `FixedContainer` and `DFlexContainer` gives us warnings in VSCode,
+but it is *essential,* because we will be deleting the definitions of those elements momentarily.
+
+#### 3.2.1.4. Check for Sanity and Update github
+
+VSCode has four new warnings about `FixedContainer` and `DFlexContainer`, but we will be fixing those momentarily.
+
+- [x] Go ahead and update github, because in the next step we will be making *major* changes and might break something!
+
+### 3.2.2.: Delete as Much Code as Possible From `App.tsx`
 
