@@ -50,5 +50,19 @@ we might not even need to use a graphics package!
   - Notes: `mdn/notes/3-canvas_with_react_hooks.md`
   - Code: `mdn/projects/3-canvas_with_react_hooks`
 
-- [ ] Project 4: Try to Finish Project 2: Use MDB Sliders to Control a *"Groja-esque"* Image
+- [x] Project 4: Try to Finish Project 2: Use MDB Sliders to Control a *"Groja-esque"* Image
+  - Result:
+    - App runs fine and is actually kind of cool!
+    - However, VSCode shows a lingering error, that occurs twice because I am using two `Canvas` elements:
+      - 'Canvas' cannot be used as a JSX component.
+        - Its type '(draw: any, onClick: any, width: any, height: any) => JSX.Element' is not a valid JSX element type.
+        - Type '(draw: any, onClick: any, width: any, height: any) => JSX.Element' is not assignable to type '(props: any, deprecatedLegacyContext?: any) => ReactNode'.
+        - Target signature provides too few arguments. Expected 4 or more, but got 2.
+  - References:
+    - Project 1, Project 2, and Project 3 above
+  - Goal:
+    - Combine portions of Project 1, Project 2, and Project 3
+    - Get to where I can use the sliders to control the colors in the *"grojaesque"* image
+  - Notes: `mdn/notes/4-canvas_with_sliders`
+  - Code: `mdn/projects/4-canvas_with_sliders`
 
