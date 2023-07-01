@@ -104,8 +104,8 @@ grep svg index.html src/*.*  # check that there are no lingering references to t
 
 ## 2.5. Sanity Checks
 
-- [x] Run `npm run lint` inside the `mdn/projects/2-grojaesque-proof_of_concept` directory
-- [x] Run `npm run dev` inside the `mdn/projects/2-grojaesque-proof_of_concept` directory
+- [x] Run `npm run lint` inside the `mdn/projects/4-canvas_with_sliders` directory
+- [x] Run `npm run dev` inside the `mdn/projects/4-canvas_with_sliders` directory
 - [x] Check in browser at http://localhost:5173/
 - [x] Check VSCode for Problems
 
