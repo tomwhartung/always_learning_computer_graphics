@@ -9,6 +9,7 @@ import { ChangeEvent, useState } from 'react';
 import { MDBRange } from 'mdb-react-ui-kit';
 
 import Canvas from './Canvas.jsx';
+// import Canvas from './Canvas.tsx';
 // const Canvas = require('./Canvas');
 
 // Important types
@@ -65,9 +66,9 @@ const canvasWidth = ( squareSize * gridSize ) + ( 2 * gridTopX );
 const canvasHeight = ( squareSize * gridSize ) + ( 2 * gridTopY );
 console.log( "canvasWidth = " + canvasWidth + ", canvasHeight = " + canvasHeight );
 
-// ******************************************************************************************
-// globalProps: A TEMPORARY GLOBAL variable to be replaced by a Context whatever in Project 5
-// ******************************************************************************************
+// ************************************************************************************************
+// globalProps: A TEMPORARY GLOBAL variable to be replaced by a Context whatever in a later Project
+// ************************************************************************************************
 const globalProps: GrojaesqueImagePercents = {
   opacityPercent: valueToPct( defaultValue ),
   blueVsYellowPercent: valueToPct( defaultValue ),
