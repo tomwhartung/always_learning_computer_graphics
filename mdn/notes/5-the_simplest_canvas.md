@@ -201,3 +201,93 @@ VSCode has four new warnings about `FixedContainer` and `DFlexContainer`, but we
 
 ### 3.2.2.: Delete as Much Code as Possible From `App.tsx`
 
+We will be working from the bottom up.
+
+#### 3.2.2.1. Delete Components
+
+Delete the following function components:
+
+- [x] `DFlexContainer`
+- [x] `DFlexImageCards`
+- [x] `FixedContainer`
+- [x] `FixedSizeImageCards`
+- [x] `MySliderCard`
+- [x] `MySlider`
+
+#### 3.2.2.2. Delete Global Functions
+
+Delete the following global functions:
+
+- [x] `getRandomPrimaryColor()` function
+- [x] `valueToPct` function
+
+#### 3.2.2.3. Gut the `draw()` Function
+
+Replace the `draw()` function with the code in the following code box:
+
+```
+// draw: Minimal draw function to ensure the Canvas works
+const draw = (context: CanvasRenderingContext2D) => {
+  const width = canvasWidth;
+  const height = canvasHeight;
+
+  // Paint it all black
+  context.fillStyle = "rgb(0, 0, 0)";
+  context.fillRect(0, 0, width, height);
+
+  // Paint four colored squares inside the image
+  context.fillStyle = "rgba(255, 0, 0, 100)";    // Red
+  context.fillRect(0, 150, 50, 50);
+  context.fillStyle = "rgba(0, 255, 0, 100)";    // Green
+  context.fillRect(50, 100, 50, 50);
+  context.fillStyle = "rgba(0, 0, 255, 100)";    // Blue
+  context.fillRect(100, 50, 50, 50);
+  context.fillStyle = "rgba(255, 255, 0, 100)";  // Yellow
+  context.fillRect(150, 0, 50, 50);
+};
+```
+
+#### 3.2.2.4. Delete *All* Global Variables *Except* `canvasWidth` and `canvasHeight`
+
+Delete the following global variables:
+
+- [x] `defaultValue`
+- [x] `numberOfSliderCards`
+- [x] `grojaesqueImagePropLabels`
+- [x] `grojaesqueImagePropNames`
+- [x] `colorLetters`
+- [x] `gridTopX`
+- [x] `gridTopY`
+- [x] `squareSize`
+- [x] `gridSize`
+- [x] `globalProps`
+
+#### 3.2.2.5. Delete All Interfaces
+
+Delete the following interfaces:
+
+- [x] `MySliderProps`
+- [x] `GrojaesqueImageProps`
+- [x] `GrojaesqueImagePercents`
+
+#### 3.2.2.6. Delete Unused `import`s
+
+Delete the following import statements:
+
+```
+import { ChangeEvent, useState } from 'react';  // DELETE THIS LINE
+import { MDBRange } from 'mdb-react-ui-kit';    // DELETE THIS LINE
+```
+
+#### 3.2.2.7. Check for Sanity and Update github
+
+VSCode is back to just the one error:
+
+- Could not find a declaration file for module './Canvas.jsx'.
+  - '/var/www/always_learning/always_learning_computer_graphics/mdn/projects/5-the_simplest_canvas/src/Canvas.jsx'
+  - implicitly has an 'any' type.
+
+Despite the error - which is what we are going to try to fix here - the App runs ok
+
+- Update github with this minimal version of `App.tsx`
+
