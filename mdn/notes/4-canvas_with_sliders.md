@@ -7,8 +7,8 @@ Create a totally random *"gorja-esque"* image that reflects the values of four s
 
 - [x] 1. Start with Vite, Reactjs, MDB, TypeScript, and ESLint
 - [x] 2. Copy in code from the `mdn/projects/2-grojaesque-proof_of_concept/` project in this repo
-- [ ] 3. Add in code from Project 3 in `mdn/projects/3-canvas_with_react_hooks/`
-- [ ] 4. Update code so that the image reflects the values of the four sliders
+- [x] 3. Add in code from Project 3 in `mdn/projects/3-canvas_with_react_hooks/`
+- [x] 4. Update code so that the image reflects the values of the four sliders
 
 # 1. Start with Vite, Reactjs, MDB, TypeScript, and ESLint
 
