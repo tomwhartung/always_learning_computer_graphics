@@ -291,3 +291,64 @@ Despite the error - which is what we are going to try to fix here - the App runs
 
 - Update github with this minimal version of `App.tsx`
 
+# 4. Adding `Canvas.tsx` Changes the Error Message!
+
+Started trying to create `Canvas.tsx` - a TypeScript version of `Canvas.jsx` - and it changed the VSCode error message!
+
+**Notes:**
+
+- This new file is not being included in `App.tsx`
+- Nor is this new file loaded in the VSCode editor
+- Simply adding it to the directory changes the error message!
+
+## 4.1. **New** VSCode Error
+
+Ye olde *"declaration file"* error is now gone and we have this one:
+
+- 'Canvas' cannot be used as a JSX component.
+  - Its type '(draw: any, onClick: any, width: any, height: any) => JSX.Element' is not a valid JSX element type.
+  - Type '(draw: any, onClick: any, width: any, height: any) => JSX.Element' is not assignable
+    - to type '(props: any, deprecatedLegacyContext?: any) => ReactNode'.
+  - Target signature provides too few arguments. Expected 4 or more, but got 2.
+
+## 4.2. Getting Back to the **Old** VSCode Error
+
+Renaming the file from `Canvas.tsx` to `Canvas.tsx-NOT` - as in the following command:
+
+```
+mv Canvas.tsx Canvas.tsx-NOT
+```
+
+Gets us back to the original *"Ye Olde"* "Could not find a declaration file..." error.
+
+**Interesting!**
+
+### 4.2.1. Attempts to Fix the Original VSCode Error
+
+We have already spent quite a bit of time trying to fix *"Ye Olde"* "...declaration file..." error.
+
+- For details, see subsection *"2.6.2.1. Get an Error"* in `mdn/notes/3-canvas_with_react_hooks.md`
+
+However, it is **good to *finally* know why the error message changed!**
+
+
+# 5. Fixing the Error, Including Converting `Canvas.jsx` to `Canvas.tsx`
+
+Ideas for fixing the error and possibly converting `Canvas.jsx` to `Canvas.tsx`:
+
+- [x] Idea 5.0. Try to Fix *"Ye Olde"* "...declaration file..." Error
+  - [x] As mentioned above, I've alread tried this!
+  - [x] For details, see subsection *"2.6.2.1. Get an Error"* in `mdn/notes/3-canvas_with_react_hooks.md`
+ 
+- [ ] Idea 5.1. Research `React.useRef()` and `React.useEffect()`, which are used in `Canvas.jsx` 
+  - [ ] Good Idea 5.1.1. Research React hooks in General 
+
+- [ ] Idea 5.2. Look for a New Solution
+  - The one I found and used was a little outdated
+  - Example search: "typescript react canvas how-to"
+- [ ] Idea 5.3. Look for How to Convert Extended JS `*.jsx` files to TypeScript `*.tsx` files
+  - This sounds like something that would be good to know
+  - Example search: "how to convert .jsx to .tsx"
+- [ ] Idea 5.4. Add Code in `Canvas.jsx` to `App.tsx`
+  - Note that this implies knowing how to convert `*.jsx` files to `*.tsx` files!
+
