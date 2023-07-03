@@ -351,4 +351,39 @@ Ideas for fixing the error and possibly converting `Canvas.jsx` to `Canvas.tsx`:
   - Example search: "how to convert .jsx to .tsx"
 - [ ] Idea 5.4. Add Code in `Canvas.jsx` to `App.tsx`
   - Note that this implies knowing how to convert `*.jsx` files to `*.tsx` files!
+- [ ] Idea 5.5. Post to stackoverflow!
+  - If I go through all those ideas and still get an error, ask for help!!!
+
+
+## Idea 5.1. Research `React.useRef()` and `React.useEffect()`, which are used in `Canvas.jsx`
+
+### 5.1.1. References
+
+- React Hooks are called ["Escape Hatches"](https://react.dev/learn/escape-hatches)
+- [React Refs](https://react.dev/learn/referencing-values-with-refs)
+
+### 5.1.2. Attempts Tried
+
+### 5.1.3. Good Idea: Research React Hooks in General
+
+Hooks provide *"escape hatches that let you “step outside” React and connect to external systems.
+Most of your application logic and data flow should not rely on these features."*
+
+#### 5.1.3.1. Notes and Quotes From the React Refs Page
+
+These tidbits are from the "React Refs" or
+[*"Referencing Values With Refs"*](https://react.dev/learn/referencing-values-with-refs) page.
+
+From the *"Example: building a stopwatch"* section:
+
+> When a piece of information is used for rendering, keep it in state.
+> When a piece of information is only needed by event handlers and changing it doesn’t require a re-render, using a ref may be more efficient.
+
+From the *"Differences between refs and state"* section:
+
+- Refs are mutable: *"you can modify and update current’s value outside of the rendering process."*
+- State is "immutable: *"you must use the state setting function to modify state variables to queue a re-render."*
+
+> [R]eading `ref.current` during render leads to unreliable code. If you need that, use state instead.
+
 
