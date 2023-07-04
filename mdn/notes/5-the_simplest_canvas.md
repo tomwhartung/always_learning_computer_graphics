@@ -362,7 +362,9 @@ Ideas for fixing the error and possibly converting `Canvas.jsx` to `Canvas.tsx`:
 - React Hooks are called ["Escape Hatches"](https://react.dev/learn/escape-hatches)
 - [React Refs](https://react.dev/learn/referencing-values-with-refs)
 
-### 5.1.2. Attempts Tried
+### 5.1.2. Attempts Tried 
+
+TBD 
 
 ### 5.1.3. Good Idea: Research React Hooks in General
 
@@ -374,16 +376,77 @@ Most of your application logic and data flow should not rely on these features."
 These tidbits are from the "React Refs" or
 [*"Referencing Values With Refs"*](https://react.dev/learn/referencing-values-with-refs) page.
 
-From the *"Example: building a stopwatch"* section:
+##### 5.1.3.1.1. From the *"Example: building a stopwatch"* section:
 
 > When a piece of information is used for rendering, keep it in state.
 > When a piece of information is only needed by event handlers and changing it doesn’t require a re-render, using a ref may be more efficient.
 
-From the *"Differences between refs and state"* section:
+##### 5.1.3.1.2. From the *"Differences between refs and state"* section:
 
 - Refs are mutable: *"you can modify and update current’s value outside of the rendering process."*
 - State is "immutable: *"you must use the state setting function to modify state variables to queue a re-render."*
 
 > [R]eading `ref.current` during render leads to unreliable code. If you need that, use state instead.
 
+##### 5.1.3.1.3. From the *"Best practices for refs"* section:
+
+> Treat refs as an escape hatch. Refs are useful when you work with external systems or browser APIs.
+
+- I suppose we can consider a `canvas` as being an external system or browser API
+
+> Don’t read or write ref.current during rendering. If some information is needed during rendering, use state instead.
+
+#### 5.1.3.2. Notes and Quotes From the Manipulating the DOM with Refs Page
+
+These tidbits are from the
+[*"Manipulating the DOM with Refs"*](https://react.dev/learn/manipulating-the-dom-with-refs) page.
+
+Note that these two statements are equivalent:
+
+```
+const canvas = React.useRef();       // from Canvas.jsx
+const canvas = React.useRef(null);   // see below
+```
+
+##### 5.1.3.2.1. From the *"Getting a ref to the node"* section:
+
+Use `useRef` to *"declare a `ref` inside your component:"* `const myRef = useRef(null);`
+
+Then *"pass your ref as the ref attribute to the JSX tag for which you want to get the DOM node:"*
+
+```
+<div ref={myRef}>
+```
+
+**This is *exactly* what happens inside the definition of `Canvas` as an *arrow function* in `Canvas.jsx`**
+
+- This makes the `Canvas` variable refer to the `<canvas ...` element
+
+> The `useRef` Hook returns an object with a single property called `current`....
+> When React creates a DOM node for this `<div>`, React will put a reference to this node into `myRef.current`.
+> You can then access this DOM node from your event handlers and use the built-in browser APIs defined on it.
+
+**This is how `Canvas.jsx` uses the browser graphics API to obtain the context we need to `draw` shapes:**
+
+```
+const context = canvas.current.getContext('2d');
+```
+
+It appears to me that we use a *ref* instead of *state* when drawing graphics because the drawing commands work immediately.
+
+- Because the drawing happens right away, there is no need to re-render the `Canvas`.
+
+Remember:
+
+> Refs are like state variables that don’t trigger re-renders when you set them.
+
+##### 5.1.3.2.2. From the *"Accessing another component’s DOM nodes"* section:
+
+
+
+
+
+### 5.1.4. Results 
+
+TBD 
 
