@@ -172,6 +172,7 @@ git commit -m 'Deleted crufty icons from mdn/projects/5-the_simplest_canvas .'
     const pixelY = Math.round( event.clientY - rect.top );
     console.log( "Someone clicked on the Canvas at (" + pixelX + ", " + pixelY + ")." );
   }
+```
 
 #### Step 3.2.1.3. Add a `Canvas` Element
 
@@ -489,4 +490,92 @@ A couple of high-level of recommendations:
 > However... **You can safely modify parts of the DOM that React has *no* reason to update.**
 
 **Note:** we might want to return to this page later, after having worked with refs and letting this all sink in a bit.
+
+#### 5.1.3.3. Notes and Quotes From the *"Synchronizing With Effects"* Page
+
+These tidbits are from the
+[Synchronizing With Effects](https://react.dev/learn/synchronizing-with-effects).
+
+Following is why we have *Effects:*
+
+> *Effects* let you run some code after rendering so that you can synchronize your component with some system outside of React.
+
+##### 5.1.3.3.1. From the *"What are Effects and how are they different from events?"* section:
+
+React components contain these two types of logic:
+
+- *"Rendering Code"* - code that manages props and state and `return`s JSX to be rendered on the screen
+  - For details, see [Describing the UI](https://react.dev/learn/describing-the-ui)
+- *"Event handlers"* - code existing in *"nested functions"* in *"components that **do** things"*
+  - For details, see [Adding Interactivity](https://react.dev/learn/adding-interactivity)
+
+**Sometimes we need to write code that does not fit into one of these two types.**
+
+- A typical example is code that needs to interact with something outside the browser, such as a server
+
+> ** *Effects* let you specify side effects that are caused by rendering itself, rather than by a particular event.**
+
+> [S]etting up a server connection is an *Effect* because it should happen no matter which interaction caused the component to appear.
+> Effects run at the end of a commit after the screen updates.
+> This is a good time to synchronize the React components with some external system (like network or a third-party library).
+
+
+
+##### 5.1.3.3.2. From the *"You might not need an Effect"* section:
+
+##### 5.1.3.3.3. From the *"How to write an Effect"* section:
+
+##### 5.1.3.3.4. From the *""* section:
+##### 5.1.3.3.5. From the *""* section:
+##### 5.1.3.3.6. From the *""* section:
+
+#### 5.1.3.4. Notes and Quotes From the *""* Page
+
+These tidbits are from the
+[](https://react.dev/learn/separating-events-from-effects) page.
+
+##### 5.1.3.4.1. From the *""* section:
+##### 5.1.3.4.2. From the *""* section:
+
+
+#### 5.1.3.5. Notes and Quotes From the *""* Page
+
+These tidbits are from the
+[](https://react.dev/learn/removing-effect-dependencies) page.
+
+##### 5.1.3.5.1. From the *""* section:
+##### 5.1.3.5.2. From the *""* section:
+
+
+#### 5.1.3.6. Notes and Quotes From the *""* Page
+
+These tidbits are from the
+[](https://react.dev/learn/reusing-logic-with-custom-hooks) page.
+
+##### 5.1.3.6.1. From the *""* section:
+##### 5.1.3.6.2. From the *""* section:
+
+
+#### 5.1.3.7. Notes and Quotes From the *""* Page
+
+These tidbits are from the
+[](https://react.dev/learn/you-might-not-need-an-effect) page.
+
+##### 5.1.3.7.1. From the *""* section:
+##### 5.1.3.7.2. From the *""* section:
+
+
+#### 5.1.3.8. Notes and Quotes From the *""* Page
+
+These tidbits are from the
+[](https://react.dev/learn/lifecycle-of-reactive-effects) page.
+
+##### 5.1.3.8.1. From the *""* section:
+##### 5.1.3.8.2. From the *""* section:
+
+
+
+### 5.1.4. Results 
+
+TBD 
 
