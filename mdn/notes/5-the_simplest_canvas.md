@@ -371,7 +371,7 @@ TBD
 Hooks provide *"escape hatches that let you “step outside” React and connect to external systems.
 Most of your application logic and data flow should not rely on these features."*
 
-#### 5.1.3.1. Notes and Quotes From the React Refs Page
+#### 5.1.3.1. Notes and Quotes From the *"Referencing Values With Refs*" Page
 
 These tidbits are from the "React Refs" or
 [*"Referencing Values With Refs"*](https://react.dev/learn/referencing-values-with-refs) page.
@@ -396,7 +396,7 @@ These tidbits are from the "React Refs" or
 
 > Don’t read or write ref.current during rendering. If some information is needed during rendering, use state instead.
 
-#### 5.1.3.2. Notes and Quotes From the Manipulating the DOM with Refs Page
+#### 5.1.3.2. Notes and Quotes From the *"Manipulating the DOM with Refs"* Page
 
 These tidbits are from the
 [*"Manipulating the DOM with Refs"*](https://react.dev/learn/manipulating-the-dom-with-refs) page.
@@ -442,11 +442,51 @@ Remember:
 
 ##### 5.1.3.2.2. From the *"Accessing another component’s DOM nodes"* section:
 
+Typically we might want to use refs on *browser* elements but *not* on our own React elements.
 
+> if you try to put a *ref* on your own component, like `<MyInput />`, by default you will get `null` [instead of `current`].
 
+**If we find we want to use a ref on a React component,** read this section, because it shows how to do that.
+For now, I am skipping the rest of this section.
 
+##### 5.1.3.2.3. From the *"When React attaches the refs"* section:
 
-### 5.1.4. Results 
+**Good to know:**
 
-TBD 
+> In React, every update is split in two phases:
+>
+> o During **render,** React calls your components to figure out what should be on the screen.
+> o During **commit,** React applies changes to the DOM.
+
+This is why you *should not* access refs during rendering:
+
+> During the first render, the DOM nodes have not yet been created, so `ref.current` will be `null`.
+> And during the rendering of updates, the DOM nodes haven’t been updated yet.
+> So it’s too early to read them.
+
+Furthermore:
+
+> **Usually, you will access refs from event handlers.**
+
+In some cases, e.g., when there is no event handler for the ref, we may want to use an Effect.
+For details about Effects, see the next page,
+[Synchronizing With Effects](https://react.dev/learn/synchronizing-with-effects).
+
+##### 5.1.3.2.4. From the *"Best practices for DOM manipulation with refs"* section:
+
+Examples of when we might want to use a *ref* include:
+
+- Managing focus
+- Managing scroll position
+- Calling browser APIs that React does not expose
+
+Our `Canvas` uses a *ref* for the last reason: so we can use the browser API to draw an image.
+
+A couple of high-level of recommendations:
+
+> **Avoid changing DOM nodes managed by React.**...
+
+> However... **You can safely modify parts of the DOM that React has *no* reason to update.**
+
+**Note:** we might want to return to this page later, after having worked with refs and letting this all sink in a bit.
 
