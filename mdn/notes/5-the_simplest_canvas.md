@@ -519,13 +519,112 @@ React components contain these two types of logic:
 > Effects run at the end of a commit after the screen updates.
 > This is a good time to synchronize the React components with some external system (like network or a third-party library).
 
-
-
 ##### 5.1.3.3.2. From the *"You might not need an Effect"* section:
+
+Use Effects to *"synchronize with some **external** system"* such as the network or browser APIs.
+
+This section is very short, but the documentation includes a deep dive into Effects entitled
+[You might not need an Effect](https://react.dev/learn/you-might-not-need-an-effect).
+
+This page has **a lot** of information on it, including:
+
+- *"How to remove unnecessary Effects"*
+- *"Sharing logic between event handlers"*
+- *"Sending a POST request"
+- *"Initializing the application"*
+  - Interestingly, the current page includes a subsection entitled *"Not an Effect: Initializing the application"*
+    - **Note:** this subsection appears in the *"How to handle the Effect firing twice in development?"* section
+- *"Fetching data"*
+
+These all sound like things I might need to do later!
 
 ##### 5.1.3.3.3. From the *"How to write an Effect"* section:
 
-##### 5.1.3.3.4. From the *""* section:
+Here is the process:
+
+> Step 1. Declare an Effect. By default, your Effect will run after every render.
+
+For example:
+
+```
+function MyComponent() {
+  useEffect(() => {
+    // Code here will run after *every* render
+  });
+  return <div />;
+}
+```
+
+> In React, rendering should be a pure calculation of JSX and should not contain side effects like modifying the DOM.
+
+Using an Effect allows React to first update the screen *then* run the effect to change stuff.
+
+**Warning:** this code will create an **infinite loop:**
+
+```
+const [count, setCount] = useState(0);
+useEffect(() => {
+  setCount(count + 1);  // setting state triggers re-rendering, which triggers the Effect, which triggers...
+});
+```
+
+> Step 2. Specify the Effect dependencies. Most Effects should only re-run when needed rather than after every render.
+
+Having code that runs after every render is sometimes not what we want.
+
+- Use *dependencies* to prevent the Effect from running unnecessarily
+
+*Dependencies* are variables that:
+
+- That appear in the Effect's code
+- Appear in an array *after* the Effect's code
+
+```
+// WRONG!
+useEffect(() => {
+  if ( isPlaying ) {
+  // ...
+  }
+}, []);    // List dependencies in this array; an empty array causes an Error
+
+// GOOD!
+  useEffect(() => {
+    if (isPlaying) { // It's used here...
+      // ...
+    } else {
+      // ...
+    }
+  }, [isPlaying]); // ...so it must be declared here!
+```
+
+Digging deeper, here is the effect of having *no* dependency array versus an *empty* dependency array:
+
+```
+useEffect(() => {
+  // This runs after every render
+});
+
+useEffect(() => {
+  // This runs only on mount (when the component appears)
+}, []);
+
+useEffect(() => {
+  // This runs on mount *and also* if either a or b have changed since the last render
+}, [a, b]);
+```
+
+You do not *need* to include a *ref* in a dependency array:
+
+> [B]ecause the `ref` object has a stable identity:
+> React guarantees you’ll always get the same object from the same useRef call on every render.
+> It never changes, so it will never by itself cause the Effect to re-run.
+
+*But,* including it is ok.
+
+> Step 3. Add cleanup if needed. Some Effects need to specify how to stop, undo, or clean up whatever they were doing. For example, “connect” needs “disconnect”, “subscribe” needs “unsubscribe”, and “fetch” needs either “cancel” or “ignore”. You will learn how to do this by returning a cleanup function.
+
+
+##### 5.1.3.3.4. From the *"How to handle the Effect firing twice in development?"* section:
 ##### 5.1.3.3.5. From the *""* section:
 ##### 5.1.3.3.6. From the *""* section:
 
