@@ -702,26 +702,122 @@ Maybe come back to this later.
 
 No comment at this time.
 
-#### 5.1.3.4. Notes and Quotes From the *""* Page
+#### 5.1.3.4. Notes and Quotes From the *"Separating Events from Effects"* Page
 
 These tidbits are from the
-[](https://react.dev/learn/separating-events-from-effects) page.
+[Separating Events from Effects](https://react.dev/learn/separating-events-from-effects) page.
 
-##### 5.1.3.4.1. From the *""* section:
-##### 5.1.3.4.2. From the *""* section:
+- Some interactions may be best handled by *"a mix of both behaviors"*
 
-##### 5.1.3.3.5. From the *"Putting it all together"* section:
-##### 5.1.3.3.6. From the *"Recap"* section:
+##### 5.1.3.4.1. From the *"Choosing between event handlers and Effects"* section:
 
+They use a chat room as an example.
+A chat room typically interacts with a user two ways:
 
-#### 5.1.3.5. Notes and Quotes From the *""* Page
+- 1. It connects to the room and synchronizes data at regular intervals
+  - The synchronization aspect means this is best handled as an Effect
+  - This is the topic of the *second* subsection, *"Effects run whenever synchronization is needed"*
+- 2. It sends and receives messages
+  - Sending is a specific interaction and is best handled in an event handler
+  - This is the topic of the *first* subsection, *"Event handlers run in response to specific interactions"*
+
+##### 5.1.3.4.2. From the *"Reactive values and reactive logic"* section:
+
+Examples of *"reactive values"* include:
+
+- Props
+- State
+- Variables in the body of a component
+
+The page then asserts that:
+
+> Logic inside event handlers is *not reactive.*
+
+The `message` a user is typing in a chat room *is not reactive,* because
+they do *not* want to send it until they finish typing it and click Send.
+
+```
+function handleSendClick() {
+  sendMessage(message);
+}
+```
+
+> Logic inside Effects is *reactive.*
+
+The `roomId` of a chat room *is reactive,* because
+when the user changes it they expect the app to *react* and change the room.
+
+```
+useEffect(() => {
+  const connection = createConnection(serverUrl, roomId);
+  connection.connect();
+  return () => {
+    connection.disconnect()
+  };
+}, [roomId]);
+```
+
+##### 5.1.3.4.3. From the *"Extracting non-reactive logic out of Effects"* section:
+
+> Things get more tricky when you want to mix reactive logic with non-reactive logic.
+
+Also, the subsections contain warnings that they are **"Under Construction."**
+
+**TODO:** Return to this section later!!
+
+##### 5.1.3.4.4. From the *"Recap"* section:
+
+No comment at this time.
+
+##### 5.1.3.4.5. From the *"Challenges"* section:
+
+Maybe come back to this later.
+
+#### 5.1.3.5. Notes and Quotes From the *"Removing Effect Dependencies"* Page
 
 These tidbits are from the
-[](https://react.dev/learn/removing-effect-dependencies) page.
+[Removing Effect Dependencies](https://react.dev/learn/removing-effect-dependencies) page.
 
-##### 5.1.3.5.1. From the *""* section:
-##### 5.1.3.5.2. From the *""* section:
+> Unnecessary dependencies may cause your Effect to run too often, or even create an infinite loop.
+> Follow this guide to review and remove unnecessary dependencies from your Effects.
 
+##### 5.1.3.5.1. From the *"Dependencies should match the code"* section:
+
+When writing an Effect:
+
+- 1. Specify how to start and stop it
+  - See ["the lifecycle of an effect"](https://react.dev/learn/lifecycle-of-reactive-effects#the-lifecycle-of-an-effect)
+- 2. Add braces for the dependencies but leave the array empty
+- 3. The linter will reccommend which variables you should add
+- 4. Add these variables to the dependencies array
+
+If the linter suggests adding one or more variables that do not make sense, prove that the variables in question
+are *not* dependencies by *removing* them from the Effect.
+
+**Note:** suppressing the linter's recommendation with a comment like
+`// eslint-ignore-next-line react-hooks/exhaustive-deps`
+*"leads to very unintuitive bugs that are hard to find and fix."*
+
+##### 5.1.3.5.2. From the *"Removing unnecessary dependencies"* section:
+
+Whenever you adjust an Effect's list of dependencies, ask these questions:
+
+- *"Should this code move to an event handler?"*
+- *"Is your Effect doing several unrelated things? "*
+- *"Are you reading some state to calculate the next state?"*
+- *"Do you want to read a value without “reacting” to its changes?"*
+  - At this time, this subsection is *"Under Construction"*
+- *"Does some reactive value change unintentionally?"*
+
+**Note:* Each of these questions is a subsection of this section.
+
+##### 5.1.3.5.3. From the *"Recap"* section:
+
+No comment at this time.
+
+##### 5.1.3.5.4. From the *"Challenges"* section:
+
+Maybe come back to this later.
 
 #### 5.1.3.6. Notes and Quotes From the *""* Page
 
@@ -730,6 +826,13 @@ These tidbits are from the
 
 ##### 5.1.3.6.1. From the *""* section:
 ##### 5.1.3.6.2. From the *""* section:
+
+##### 5.1.3.6.3. From the *""* section:
+##### 5.1.3.6.4. From the *""* section:
+
+##### 5.1.3.6.5. From the *"Putting it all together"* section:
+##### 5.1.3.6.6. From the *"Recap"* section:
+##### 5.1.3.6.5. From the *"Challenges"* section:
 
 
 #### 5.1.3.7. Notes and Quotes From the *""* Page
@@ -740,6 +843,13 @@ These tidbits are from the
 ##### 5.1.3.7.1. From the *""* section:
 ##### 5.1.3.7.2. From the *""* section:
 
+##### 5.1.3.7.3. From the *""* section:
+##### 5.1.3.7.4. From the *""* section:
+
+##### 5.1.3.7.5. From the *"Putting it all together"* section:
+##### 5.1.3.7.6. From the *"Recap"* section:
+##### 5.1.3.7.5. From the *"Challenges"* section:
+
 
 #### 5.1.3.8. Notes and Quotes From the *""* Page
 
@@ -748,6 +858,13 @@ These tidbits are from the
 
 ##### 5.1.3.8.1. From the *""* section:
 ##### 5.1.3.8.2. From the *""* section:
+
+##### 5.1.3.8.3. From the *""* section:
+##### 5.1.3.8.4. From the *""* section:
+
+##### 5.1.3.8.5. From the *"Putting it all together"* section:
+##### 5.1.3.8.6. From the *"Recap"* section:
+##### 5.1.3.8.5. From the *"Challenges"* section:
 
 
 
