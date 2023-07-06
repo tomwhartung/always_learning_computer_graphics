@@ -338,7 +338,7 @@ However, it is **good to *finally* know why the error message changed!**
 Ideas for fixing the error and possibly converting `Canvas.jsx` to `Canvas.tsx`:
 
 - [x] Idea 5.0. Try to Fix *"Ye Olde"* "...declaration file..." Error
-  - [x] As mentioned above, I've alread tried this!
+  - [x] As mentioned above, I've already tried this!
   - [x] For details, see subsection *"2.6.2.1. Get an Error"* in `mdn/notes/3-canvas_with_react_hooks.md`
  
 - [ ] Idea 5.1. Research `React.useRef()` and `React.useEffect()`, which are used in `Canvas.jsx` 
@@ -663,8 +663,44 @@ root.render(
 **Note:** the setup I am using specifies `StrictMode` in `main.tsx`.
 
 ##### 5.1.3.3.4. From the *"How to handle the Effect firing twice in development?"* section:
-##### 5.1.3.3.5. From the *""* section:
-##### 5.1.3.3.6. From the *""* section:
+
+The answer, as detailed in the last section, is usually to add a cleanup function.
+
+> The rule of thumb is that the user shouldn’t be able to distinguish between
+> the Effect running once (as in production) and
+> a setup → cleanup → setup sequence (as you’d see in development).
+
+The bulk of this section describes these *"common patterns"*:
+
+- *"Controlling non-React widgets"*
+  - Cites maintaining a map's zoom level and closing a modal dialog as examples
+  - These two cases are handled differently
+- *"Subscribing to events"*
+  - Probably want to provide a cleanup function that unsubscribes
+- *"Triggering animations"*
+  - Probably want the cleanup function to reset the animation to its beginning
+- *"Fetching data"*
+  - There is a lot here and I will probably want to **come back to this at some point**
+  - There is also a [link to a how-to](https://www.robinwieruch.de/react-hooks-fetch-data/)
+    - This link goes to a blog post by the author of the React book I bought
+  - This subsection also lists the many downsides to using Effects for fetching data
+  - It also provides some suggestions for fetching data *without* using an Effect
+- *"Sending analytics"*
+  - The example shows how to log analytics when a user visits a page.
+  - Letting this run twice in development is OK because it will just run once in production
+- *"Not an Effect: Initializing the application"*
+  - In most cases we will want to put initialization code outside of any component
+- *"Not an Effect: Buying a product"*
+  - It is best to *"Delete the Effect and move your /api/buy request into the Buy button event handler"*
+  - They include some code showing how to do this
+
+##### 5.1.3.3.5. From the *"Putting it all together"* section:
+
+Maybe come back to this later.
+
+##### 5.1.3.3.6. From the *"Recap"* section:
+
+No comment at this time.
 
 #### 5.1.3.4. Notes and Quotes From the *""* Page
 
@@ -673,6 +709,9 @@ These tidbits are from the
 
 ##### 5.1.3.4.1. From the *""* section:
 ##### 5.1.3.4.2. From the *""* section:
+
+##### 5.1.3.3.5. From the *"Putting it all together"* section:
+##### 5.1.3.3.6. From the *"Recap"* section:
 
 
 #### 5.1.3.5. Notes and Quotes From the *""* Page
