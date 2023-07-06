@@ -702,14 +702,47 @@ Maybe come back to this later.
 
 No comment at this time.
 
-#### 5.1.3.4. Notes and Quotes From the *"Separating Events from Effects"* Page
+
+#### 5.1.3.4. Notes and Quotes From the *"You Might Not Need an Effect"* Page
+
+These tidbits are from the
+[](https://react.dev/learn/you-might-not-need-an-effect) page.
+
+##### 5.1.3.4.1. From the *""* section:
+##### 5.1.3.4.2. From the *""* section:
+
+##### 5.1.3.4.3. From the *""* section:
+##### 5.1.3.4.4. From the *""* section:
+
+##### 5.1.3.4.5. From the *"Putting it all together"* section:
+##### 5.1.3.4.6. From the *"Recap"* section:
+##### 5.1.3.4.5. From the *"Challenges"* section:
+
+
+#### 5.1.3.5. Notes and Quotes From the *""* Page
+
+These tidbits are from the
+[](https://react.dev/learn/lifecycle-of-reactive-effects) page.
+
+##### 5.1.3.5.1. From the *""* section:
+##### 5.1.3.5.2. From the *""* section:
+
+##### 5.1.3.5.3. From the *""* section:
+##### 5.1.3.5.4. From the *""* section:
+
+##### 5.1.3.5.5. From the *"Putting it all together"* section:
+##### 5.1.3.5.6. From the *"Recap"* section:
+##### 5.1.3.5.5. From the *"Challenges"* section:
+
+
+#### 5.1.3.6. Notes and Quotes From the *"Separating Events from Effects"* Page
 
 These tidbits are from the
 [Separating Events from Effects](https://react.dev/learn/separating-events-from-effects) page.
 
 - Some interactions may be best handled by *"a mix of both behaviors"*
 
-##### 5.1.3.4.1. From the *"Choosing between event handlers and Effects"* section:
+##### 5.1.3.6.1. From the *"Choosing between event handlers and Effects"* section:
 
 They use a chat room as an example.
 A chat room typically interacts with a user two ways:
@@ -721,7 +754,7 @@ A chat room typically interacts with a user two ways:
   - Sending is a specific interaction and is best handled in an event handler
   - This is the topic of the *first* subsection, *"Event handlers run in response to specific interactions"*
 
-##### 5.1.3.4.2. From the *"Reactive values and reactive logic"* section:
+##### 5.1.3.6.2. From the *"Reactive values and reactive logic"* section:
 
 Examples of *"reactive values"* include:
 
@@ -757,7 +790,7 @@ useEffect(() => {
 }, [roomId]);
 ```
 
-##### 5.1.3.4.3. From the *"Extracting non-reactive logic out of Effects"* section:
+##### 5.1.3.6.3. From the *"Extracting non-reactive logic out of Effects"* section:
 
 > Things get more tricky when you want to mix reactive logic with non-reactive logic.
 
@@ -765,15 +798,15 @@ Also, the subsections contain warnings that they are **"Under Construction."**
 
 **TODO:** Return to this section later!!
 
-##### 5.1.3.4.4. From the *"Recap"* section:
+##### 5.1.3.6.4. From the *"Recap"* section:
 
 No comment at this time.
 
-##### 5.1.3.4.5. From the *"Challenges"* section:
+##### 5.1.3.6.5. From the *"Challenges"* section:
 
 Maybe come back to this later.
 
-#### 5.1.3.5. Notes and Quotes From the *"Removing Effect Dependencies"* Page
+#### 5.1.3.7. Notes and Quotes From the *"Removing Effect Dependencies"* Page
 
 These tidbits are from the
 [Removing Effect Dependencies](https://react.dev/learn/removing-effect-dependencies) page.
@@ -781,7 +814,7 @@ These tidbits are from the
 > Unnecessary dependencies may cause your Effect to run too often, or even create an infinite loop.
 > Follow this guide to review and remove unnecessary dependencies from your Effects.
 
-##### 5.1.3.5.1. From the *"Dependencies should match the code"* section:
+##### 5.1.3.7.1. From the *"Dependencies should match the code"* section:
 
 When writing an Effect:
 
@@ -798,7 +831,7 @@ are *not* dependencies by *removing* them from the Effect.
 `// eslint-ignore-next-line react-hooks/exhaustive-deps`
 *"leads to very unintuitive bugs that are hard to find and fix."*
 
-##### 5.1.3.5.2. From the *"Removing unnecessary dependencies"* section:
+##### 5.1.3.7.2. From the *"Removing unnecessary dependencies"* section:
 
 Whenever you adjust an Effect's list of dependencies, ask these questions:
 
@@ -811,60 +844,83 @@ Whenever you adjust an Effect's list of dependencies, ask these questions:
 
 **Note:* Each of these questions is a subsection of this section.
 
-##### 5.1.3.5.3. From the *"Recap"* section:
+##### 5.1.3.7.3. From the *"Recap"* section:
 
 No comment at this time.
 
-##### 5.1.3.5.4. From the *"Challenges"* section:
+##### 5.1.3.7.4. From the *"Challenges"* section:
 
 Maybe come back to this later.
 
-#### 5.1.3.6. Notes and Quotes From the *""* Page
+#### 5.1.3.8. Notes and Quotes From the *"Reusing Logic with Custom Hooks"* Page
 
 These tidbits are from the
-[](https://react.dev/learn/reusing-logic-with-custom-hooks) page.
+[Reusing Logic with Custom Hooks](https://react.dev/learn/reusing-logic-with-custom-hooks) page.
 
-##### 5.1.3.6.1. From the *""* section:
-##### 5.1.3.6.2. From the *""* section:
+- As the title of the page suggests, this topic is very advanced
 
-##### 5.1.3.6.3. From the *""* section:
-##### 5.1.3.6.4. From the *""* section:
+##### 5.1.3.8.1. From the *"Custom Hooks: Sharing logic between components"* section:
 
-##### 5.1.3.6.5. From the *"Putting it all together"* section:
-##### 5.1.3.6.6. From the *"Recap"* section:
-##### 5.1.3.6.5. From the *"Challenges"* section:
+This section looks at how an app could monitor and stay synchronized with
+the status of the user's network connection.
 
+- A `StatusBar` component keeps track of wether the user is still connected
+- When the network is down, a `SaveButton` component switches its text from "Save" to "Reconnecting"
 
-#### 5.1.3.7. Notes and Quotes From the *""* Page
+It is useful to know how these two components can share the same logic, and thus avoid redundant code.
 
-These tidbits are from the
-[](https://react.dev/learn/you-might-not-need-an-effect) page.
+- They show how to do this by creating a custom hook named `useOnlineStatus`
 
-##### 5.1.3.7.1. From the *""* section:
-##### 5.1.3.7.2. From the *""* section:
+Just as:
 
-##### 5.1.3.7.3. From the *""* section:
-##### 5.1.3.7.4. From the *""* section:
+> React component names must start with a capital letter, like `StatusBar` and `SaveButton`
 
-##### 5.1.3.7.5. From the *"Putting it all together"* section:
-##### 5.1.3.7.6. From the *"Recap"* section:
-##### 5.1.3.7.5. From the *"Challenges"* section:
+so must:
 
+> Hook names must start with use followed by a capital letter, like `useState` (built-in) or `useOnlineStatus
 
-#### 5.1.3.8. Notes and Quotes From the *""* Page
+A large subsection in this section is entitled:
 
-These tidbits are from the
-[](https://react.dev/learn/lifecycle-of-reactive-effects) page.
+> **Custom Hooks let you share stateful logic, not state itself**
 
-##### 5.1.3.8.1. From the *""* section:
-##### 5.1.3.8.2. From the *""* section:
+It may be useful to return to this at some point, but right now I need to stay focused on
+fixing the TypeScript error I am seeing in my *"Simplest Canvas."*
 
-##### 5.1.3.8.3. From the *""* section:
-##### 5.1.3.8.4. From the *""* section:
+##### 5.1.3.8.2. From the *"Passing reactive values between Hooks"* section:
 
-##### 5.1.3.8.5. From the *"Putting it all together"* section:
-##### 5.1.3.8.6. From the *"Recap"* section:
+This section stresses that:
+
+> [C]ustom hooks need to be pure
+
+It also contains a subsection entitled *"Passing event handlers to custom Hooks"* that is *"Under Construction."*
+
+##### 5.1.3.8.3. From the *"When to use custom Hooks "* section:
+
+This section of the page is intended to help us understand that custom hooks are not always the answer:
+
+> You don’t need to extract a custom Hook for every little duplicated bit of code. Some duplication is fine.
+
+However, using a custom Hook can also help *"you precisely communicate your intent and how the data flows through it."*
+
+As an example, they work through creating a `ShippingForm` component that initially contains a bit of duplicate code.
+They simplify the component by creating a custom Hook named `useData` to make the component more concise and easy to
+understand - and ultimately easier to maintain.
+
+Two subsections delve into other examples to consider while explaining that:
+
+> **"Custom Hooks help you migrate to better patterns"**
+
+and, as usual:
+
+> **"There is more than one way to do it"**
+
+##### 5.1.3.8.4. From the *"Recap"* section:
+
+No comment at this time.
+
 ##### 5.1.3.8.5. From the *"Challenges"* section:
+
+Maybe come back to this later.
 
 
 
