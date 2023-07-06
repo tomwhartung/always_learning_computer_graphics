@@ -542,7 +542,7 @@ These all sound like things I might need to do later!
 
 Here is the process:
 
-> Step 1. Declare an Effect. By default, your Effect will run after every render.
+> **Step 1. Declare an Effect.** By default, your Effect will run after every render.
 
 For example:
 
@@ -568,7 +568,7 @@ useEffect(() => {
 });
 ```
 
-> Step 2. Specify the Effect dependencies. Most Effects should only re-run when needed rather than after every render.
+> **Step 2. Specify the Effect dependencies.** Most Effects should only re-run when needed rather than after every render.
 
 Having code that runs after every render is sometimes not what we want.
 
@@ -621,8 +621,46 @@ You do not *need* to include a *ref* in a dependency array:
 
 *But,* including it is ok.
 
-> Step 3. Add cleanup if needed. Some Effects need to specify how to stop, undo, or clean up whatever they were doing. For example, “connect” needs “disconnect”, “subscribe” needs “unsubscribe”, and “fetch” needs either “cancel” or “ignore”. You will learn how to do this by returning a cleanup function.
+> **Step 3. Add cleanup if needed.**
 
+*"Cleanup"* tasks include stopping, disconnecting, or perhaps even undoing whatever the Effect does.
+
+- Specify an empty dependency array so that React runs the code when the component *"mounts"*
+  - A component *"mounts"* when it appears on the screen for the first time
+- If the component might *mount* more than once, then specify its *cleanup* code
+  - React will run the *cleanup* code when it *"un-mounts"* the commponent
+- During development, React automatically *mounts* components twice
+  - This helps developers know when they need to specify *cleanup* code
+- An Effect specifies its *cleanup* code by `return`ing it
+
+For example:
+
+```
+useEffect(() => {
+  const connection = createConnection();
+  connection.connect();
+  return () => {
+    connection.disconnect();
+  };
+}, []);
+```
+
+React mounts a component twice during development only when it is run in
+[`StrictMode`](https://react.dev/reference/react/StrictMode).
+
+```
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+
+const root = createRoot(document.getElementById('root'));
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+```
+
+**Note:** the setup I am using specifies `StrictMode` in `main.tsx`.
 
 ##### 5.1.3.3.4. From the *"How to handle the Effect firing twice in development?"* section:
 ##### 5.1.3.3.5. From the *""* section:
