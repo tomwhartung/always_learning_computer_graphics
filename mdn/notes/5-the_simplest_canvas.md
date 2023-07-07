@@ -521,22 +521,11 @@ React components contain these two types of logic:
 
 ##### 5.1.3.3.2. From the *"You might not need an Effect"* section:
 
-Use Effects to *"synchronize with some **external** system"* such as the network or browser APIs.
+This section is extremely short and cautions against using Effects when they are not necessary.
+It ends with a link to a page entitled
+[*"You might not need an Effect"*](https://react.dev/learn/you-might-not-need-an-effect).
 
-This section is very short, but the documentation includes a deep dive into Effects entitled
-[You might not need an Effect](https://react.dev/learn/you-might-not-need-an-effect).
-
-This page has **a lot** of information on it, including:
-
-- *"How to remove unnecessary Effects"*
-- *"Sharing logic between event handlers"*
-- *"Sending a POST request"
-- *"Initializing the application"*
-  - Interestingly, the current page includes a subsection entitled *"Not an Effect: Initializing the application"*
-    - **Note:** this subsection appears in the *"How to handle the Effect firing twice in development?"* section
-- *"Fetching data"*
-
-These all sound like things I might need to do later!
+- For those notes, see *"5.1.3.4. Notes and Quotes From the **You Might Not Need an Effect** Page"* in this document
 
 ##### 5.1.3.3.3. From the *"How to write an Effect"* section:
 
@@ -706,20 +695,79 @@ No comment at this time.
 #### 5.1.3.4. Notes and Quotes From the *"You Might Not Need an Effect"* Page
 
 These tidbits are from the
-[](https://react.dev/learn/you-might-not-need-an-effect) page.
+[You Might Not Need an Effect](https://react.dev/learn/you-might-not-need-an-effect) page.
 
-##### 5.1.3.4.1. From the *""* section:
-##### 5.1.3.4.2. From the *""* section:
+Use Effects to *"synchronize with some **external** system"* such as the network or browser APIs.
 
-##### 5.1.3.4.3. From the *""* section:
-##### 5.1.3.4.4. From the *""* section:
+##### 5.1.3.4.1. From the *"How to remove unnecessary Effects"* section:
 
-##### 5.1.3.4.5. From the *"Putting it all together"* section:
-##### 5.1.3.4.6. From the *"Recap"* section:
-##### 5.1.3.4.5. From the *"Challenges"* section:
+Following are some general guidelines for knowing when to use Effects, and when to *not* use them:
 
+- *"You don’t need Effects to transform data for rendering."*
+  - In particular, updating state in an Effect is **wrong** and can lead to infinite loops
+- *"You don’t need Effects to handle user events."*
+  - It's best to handle user events in the event handlers
+    - The event handlers know exactly what the user did
+    - Effects run *after* the screen re-renders and there's no way to know what the user did
 
-#### 5.1.3.5. Notes and Quotes From the *""* Page
+Below is a list of specific scenarios discussed in this section.
+
+- Some of these sound like things I might need to do later!
+
+The page discusses why developers might want to use an Effect to handle these situations,
+along with why that may or may not be the best way to go:
+
+- *"Updating state based on props or state"*
+  - This is usually a bad idea!
+  - Note that updating state in an Effect can lead to infinite loops!
+- *"Caching expensive calculations"*
+  - The example looks at maintaining a list of Todos
+  - You probably don't want to use an Effect
+  - However, if updating the list is slow, you might want to use the `useMemo` hook
+- *"Resetting all state when a prop changes"*
+  - At best, this is probably inefficient
+- *"Adjusting some state when a prop changes"*
+- *"Sharing logic between event handlers"*
+  - Here is a good quote from this subsection:
+
+> When you’re not sure whether some code should be in an Effect or in an event handler,
+> ask yourself why this code needs to run.
+> Use Effects only for code that should run because the component was displayed to the user.
+
+- *"Sending a POST request"
+  - I am not going to delve into all this at this time
+  - Hopefully when it comes time to POST I will remember to revisit this subsection!
+- *"Chains of computations"*
+  - Again, **using Effects to set state variables is strongly discouraged!**
+- *"Initializing the application"*
+  - Putting initialization code in an effect, or even in a component, can lead to it running twice
+  - Code that runs at the top level will run *"once when your component is imported"*
+  - This is true *"even if it doesn't end up being rendered"*
+  - See also *"5.1.3.3.4. From the *"How to handle the Effect firing twice in development?"* in this document
+- *"Notifying parent components about state changes"*
+  - Again, **using Effects to set state variables is strongly discouraged!**
+  - A better idea is to update both the current component and its parent in the event handler
+- *"Passing data to the parent"*
+  - **TODO:** revisit this when I need to start passing data around
+- *"Subscribing to an external store"*
+  - **TODO:** revisit this when I need to know when some sort of external data changes
+- *"Fetching data"*
+  - **TODO:** revisit this when I need to start fetching data
+
+**Frankly, I find this discussion to be confusing, because most of them start off with how to *not* do things!**
+
+Also, I sense that this documentation may be changing, and it would be best to wait until it stablizes or
+I need it or preferably both before delving into this level of detail.
+
+##### 5.1.3.4.2. From the *"Recap"* section:
+
+No comment at this time.
+
+##### 5.1.3.4.3. From the *"Challenges"* section:
+
+Maybe come back to this later.
+
+#### 5.1.3.5. Notes and Quotes From the *"Lifecycle of Reactive Effects"* Page
 
 These tidbits are from the
 [](https://react.dev/learn/lifecycle-of-reactive-effects) page.
@@ -732,7 +780,12 @@ These tidbits are from the
 
 ##### 5.1.3.5.5. From the *"Putting it all together"* section:
 ##### 5.1.3.5.6. From the *"Recap"* section:
+
+No comment at this time.
+
 ##### 5.1.3.5.5. From the *"Challenges"* section:
+
+Maybe come back to this later.
 
 
 #### 5.1.3.6. Notes and Quotes From the *"Separating Events from Effects"* Page
