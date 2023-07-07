@@ -770,20 +770,64 @@ Maybe come back to this later.
 #### 5.1.3.5. Notes and Quotes From the *"Lifecycle of Reactive Effects"* Page
 
 These tidbits are from the
-[](https://react.dev/learn/lifecycle-of-reactive-effects) page.
+[Lifecycle of Reactive Effects](https://react.dev/learn/lifecycle-of-reactive-effects) page.
 
-##### 5.1.3.5.1. From the *""* section:
-##### 5.1.3.5.2. From the *""* section:
+The lifecycle of components is to *"mount, update, or unmount."*
 
-##### 5.1.3.5.3. From the *""* section:
-##### 5.1.3.5.4. From the *""* section:
+In contrast, the purpose of an Effect is *"to start synchronizing something, and later to stop synchronizing it."*
 
-##### 5.1.3.5.5. From the *"Putting it all together"* section:
-##### 5.1.3.5.6. From the *"Recap"* section:
+##### 5.1.3.5.1. From the *"The lifecycle of an Effect"* section:
+
+Following is a list of the subsections in this section:
+
+- *"Why synchronization may need to happen more than once"*
+  - This subsection uses a chatroom app as the example
+  - So, in this example, the Effect needs to re-synchronize each time the user switches rooms
+- *"How React re-synchronizes your Effect"*
+  - Start sync -> Stop sync -> Start sync -> Stop sync [ -> etc...] -> Stop sync one last time
+- *"Thinking from the Effect’s perspective"*
+  - It is best to *"**always focus on a single start/stop cycle at a time**"*
+- *"How React verifies that your Effect can re-synchronize"*
+  - *"**React verifies that your Effect can re-synchronize by forcing it to do that immediately in development**"*
+- *"How React knows that it needs to re-synchronize the Effect"*
+  - React knows to run the effect because we provide it with a list of dependencies in the dependency array
+- *"Each Effect represents a separate synchronization process"*
+  - *"**Each Effect in your code should represent a separate and independent synchronization process**"*
+  - The example they use demonstrates that disconnecting from a chat room and logging the chat should be different Effects
+
+These all seem to be very detailed, but I see no reason to delve any further into any of these topics at this time.
+
+##### 5.1.3.5.2. From the *"Effects “react” to reactive values"* section:
+
+In the chat room example:
+
+- The `serverUrl` *does not* change during a re-render, so it *is not* a *"reactive value"*
+- The `roomId` *can* change during a re-render, so it *is* a *"reactive value"*
+
+If the `serverUrl` is a state variable, and might change when the user switches rooms,
+then it becomes a *"reactive value"* and needs to be specified as a dependency.
+
+Following is a list of the subsections in this section:
+
+- *"What an Effect with empty dependencies means"*
+  - *"the empty [] dependency array means this Effect" runs:
+    - *"only when the component mounts, and ... when the component unmounts"*
+  - The chat room example shows this scenario implies that the `serverUrl` and `roomId` do not change
+- *"All variables declared in the component body are reactive"*
+  - The chatroom example shows this scenario as entailing the use of a default value for `serverUrl`
+- *"React verifies that you specified every reactive value as a dependency"*
+  - Ensure *"your linter is configured for React"*
+- *"What to do when you don’t want to re-synchronize"*
+  - In this case you need to *"“prove” to the linter that these values aren’t reactive values"*
+  - *"**You can’t “choose” your dependencies**"*
+  - *"Your dependencies must include every reactive value you read in the Effect"*
+  - *"The linter enforces this"*
+
+##### 5.1.3.5.3. From the *"Recap"* section:
 
 No comment at this time.
 
-##### 5.1.3.5.5. From the *"Challenges"* section:
+##### 5.1.3.5.4. From the *"Challenges"* section:
 
 Maybe come back to this later.
 
