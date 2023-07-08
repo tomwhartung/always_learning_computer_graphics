@@ -8,9 +8,7 @@ import './App.css'
 import { ChangeEvent, useState } from 'react';
 import { MDBRange } from 'mdb-react-ui-kit';
 
-import Canvas from './Canvas.jsx';
-// import Canvas from './Canvas.tsx';
-// const Canvas = require('./Canvas');
+import Canvas from './Canvas.tsx';
 
 // Important types
 interface MySliderProps {
