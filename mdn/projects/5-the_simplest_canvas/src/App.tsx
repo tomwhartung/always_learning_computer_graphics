@@ -4,9 +4,7 @@
 //
 import './App.css'
 
-import Canvas from './Canvas.jsx';
-// import Canvas from './Canvas.tsx';
-// const Canvas = require('./Canvas');
+import Canvas from './Canvas.tsx';
 
 const canvasWidth = 200;
 const canvasHeight = 200;
@@ -23,12 +21,16 @@ const draw = (context: CanvasRenderingContext2D) => {
   // Paint four colored squares inside the image
   context.fillStyle = "rgba(255, 0, 0, 100)";    // Red
   context.fillRect(0, 150, 50, 50);
+// context.fillRect(0, 50, 50, 50);
   context.fillStyle = "rgba(0, 255, 0, 100)";    // Green
   context.fillRect(50, 100, 50, 50);
+// context.fillRect(50, 0, 50, 50);
   context.fillStyle = "rgba(0, 0, 255, 100)";    // Blue
   context.fillRect(100, 50, 50, 50);
+// context.fillRect(100, 150, 50, 50);
   context.fillStyle = "rgba(255, 255, 0, 100)";  // Yellow
   context.fillRect(150, 0, 50, 50);
+// context.fillRect(150, 100, 50, 50);
 };
 
 // App: this App's "mainline" component
