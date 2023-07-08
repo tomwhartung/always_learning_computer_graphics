@@ -66,3 +66,14 @@ we might not even need to use a graphics package!
   - Notes: `mdn/notes/4-canvas_with_sliders`
   - Code: `mdn/projects/4-canvas_with_sliders`
 
+- [x] Project 5: Using the Simplest `Canvas`
+  - References:
+    - The error message in Project 4
+  - Goal:
+    - Start with code from Project 4 and delete everything except the *"Simplest `Canvas`"*
+      - If still unable to fix the error, consider posting the problem to stackoverflow
+    - Try to convert `Canvas.jsx` to TypeScript: `Canvas.tsx`
+      - If still unable to so, I can live with it, as long as we can get that error fixed!
+  - Notes: `mdn/notes/5-the_simplest_canvas.md`
+  - Code: `mdn/projects/5-the_simplest_canvas`
+
