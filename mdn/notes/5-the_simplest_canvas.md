@@ -9,7 +9,7 @@ hope it helps accomplish one or both of the following Goals.
 These goals may possibly be related, in that they both apply to the `Canvas` element,
 so fixing one may help shed light on how to fix the other.
 
-- [ ] 1. Try to fix **NEW** TS-related error:
+- [x] 1. Try to fix **NEW** TS-related error:
   - **Note:** it might be easier to do the next step first!!
   - VSCODE Error Message:
     - 'Canvas' cannot be used as a JSX component.
@@ -19,7 +19,7 @@ so fixing one may help shed light on how to fix the other.
       - Target signature provides too few arguments. Expected 4 or more, but got 2.
     - '{ draw: (context: CanvasRenderingContext2D) => void; width: number; height: number; }'
     - but required in type '{ draw: any; function: any; width: any; height: any; }'.
-- [ ] 2. Try to Convert `Canvas.jsx` to `Canvas.tsx`
+- [x] 2. Try to Convert `Canvas.jsx` to `Canvas.tsx`
   - **Note:** it might be easier to do the previous step first!!
   - Keep existing `Canvas.jsx` just in case!
 
@@ -179,16 +179,15 @@ git commit -m 'Deleted crufty icons from mdn/projects/5-the_simplest_canvas .'
 *Replace* the code in the `return` statement in `App()` with the code in the following code box:
 
 ```
-    <>
-      <h3>The Simplest Canvas Using React</h3>
-      <div>
-        <Canvas
-          draw={draw}
-          onClick={handleImageClick}
-          width={width}
-          height={height} />
-      </div>
-    </>
+<>
+  <h3>The Simplest Canvas Using React</h3>
+  <Canvas
+    draw={draw}
+    onClick={handleImageClick}
+    width={width}
+    height={height}
+  />
+</>
 ```
 
 **Note:** deleting the markup referencing `FixedContainer` and `DFlexContainer` gives us warnings in VSCode,
@@ -337,26 +336,29 @@ However, it is **good to *finally* know why the error message changed!**
 
 Ideas for fixing the error and possibly converting `Canvas.jsx` to `Canvas.tsx`:
 
-- [x] Idea 5.0. Try to Fix *"Ye Olde"* "...declaration file..." Error
+- [x] 5.0. Try to Fix *"Ye Olde"* "...declaration file..." Error
   - [x] As mentioned above, I've already tried this!
   - [x] For details, see subsection *"2.6.2.1. Get an Error"* in `mdn/notes/3-canvas_with_react_hooks.md`
- 
-- [ ] Idea 5.1. Research `React.useRef()` and `React.useEffect()`, which are used in `Canvas.jsx` 
-  - [ ] Good Idea 5.1.1. Research React hooks in General 
-
-- [ ] Idea 5.2. Look for a New Solution
+- [x] 5.1. Research `React.useRef()` and `React.useEffect()`, which are used in `Canvas.jsx`
+  - [x] 5.1.1. Research React hooks in General
+  - [x] Notes are in `reactjs/notes/1-escape_hatches.md` in the `always_learning_javascript` repo
+- [x] 5.2. Look for a New Solution
   - The one I found and used was a little outdated
   - Example search: "typescript react canvas how-to"
-- [ ] Idea 5.3. Look for How to Convert Extended JS `*.jsx` files to TypeScript `*.tsx` files
+- [x] 5.3. Look for How to Convert Extended JS `*.jsx` files to TypeScript `*.tsx` files
   - This sounds like something that would be good to know
   - Example search: "how to convert .jsx to .tsx"
-- [ ] Idea 5.4. Add Code in `Canvas.jsx` to `App.tsx`
+- [!] 5.4. Add Code in `Canvas.jsx` to `App.tsx`
   - Note that this implies knowing how to convert `*.jsx` files to `*.tsx` files!
-- [ ] Idea 5.5. Post to stackoverflow!
+  - [!] This proved to be unnecessary because I was able to fix the error!
+  - [!] Also, this is definitely not what I want, because I will need the flexibility a reusable component provides
+    - Specifically, different personality assessments will want to draw different types of images
+- [!] 5.5. Post to stackoverflow!
   - If I go through all those ideas and still get an error, ask for help!!!
+  - [!] This proved to be unnecessary because I was able to fix the error!
 
 
-## Idea 5.1. Research `React.useRef()` and `React.useEffect()`, which are used in `Canvas.jsx`
+## 5.1. Research `React.useRef()` and `React.useEffect()`, which are used in `Canvas.jsx`
 
 ### 5.1.1. References
 
@@ -378,4 +380,84 @@ This research did not give me any ideas about how I might fix this error.
 ### 5.1.4. Results
 
 None.
+
+
+## 5.2. Look for a New Solution
+
+- The one I found initially and used was a little outdated
+- Example search: "typescript react canvas how-to"
+
+### 5.2.1. Results
+
+I enjoyed seeing some of these approaches.
+They helped inform me, but I didn't use any of them, per se.
+
+### 5.2.2. References
+
+A lot of results recommend slightly different approaches:
+
+- Putting the draw function in the component:
+  - https://medium.com/@pdx.lucasm/canvas-with-react-js-32e133c05258
+  - Not what I want, because I will need the flexibility a reusable component provides
+    - Specifically, different personality assessments will want to draw different types of images
+- Putting the draw commands in the call to `useEffect()`:
+  - https://stackoverflow.com/questions/60424853/html-canvas-with-react-hooks-and-typescript
+  - Not what I want, because I will need the flexibility a reusable component provides
+    - Specifically, different personality assessments will want to draw different types of images
+- Using a `class`:
+  - https://kernhanda.github.io/tutorial-typescript-canvas-drawing/
+  - https://stackoverflow.com/questions/63667903/canvas-wont-draw-anything-react-typescript
+  - Not what I want, because I have learned that functional components are more efficient
+- Some of them referred to a type of `React.FC`
+  - This post says that stands for *"React Functional Component"*:
+    - https://www.freecodecamp.org/news/using-typescript-in-react-apps/
+- This one encourages the use of a *"custom hook and canvas-wrapping component"*:
+  - https://reactjsexample.com/a-react-typescript-custom-hook-and-canvas-wrapping-component-providing-an-interface-to-render-2d-3d-scenes/
+
+### 5.2.3. Attempts Tried
+
+None of these posts inspired any changes to the code I already have.
+
+## 5.3. Look for How to Convert Extended JS `*.jsx` files to TypeScript `*.tsx` files
+
+- This sounds like something that would be good to know
+- Example search: "how to convert .jsx to .tsx"
+  - **Note:** The previous search revealed the answers I needed to do this!
+
+### 5.3.1. Results
+
+A lot of the problems with my initial approach to writing `Canvas.tsx` were due to
+my not knowing the syntax to use.
+
+- Combining tips and tricks gleaned from the References listed below, I was able to fix the errors!
+
+### 5.3.2. References
+
+These posts, which I turned up in the search performed in the previous subsection
+*"5.2. Look for a New Solution"*, turned out to be a big help:
+
+- https://hashnode.blainegarrett.com/html-5-canvas-react-refs-and-typescript-ckf4jju8r00eypos1gyisenyf
+  - Shows how to declare the type of a ref:
+    - See the second code box in *"Part 3 Making React Refs Type aware with TypeScript Generics"*
+    - `const canvasRef = useRef<HTMLCanvasElement | null>(null);`
+  - JSX doesn't care if `canvas.current` might be null, but TypeScript does
+    - So I need to check `canvas.current` for being null before using it
+- https://www.ankursheel.com/blog/react-component-draw-page-hooks-typescript
+  - The idea for declaring an interface makes sense
+  - That, along with the syntax for declaring the `Canvas` using the interface and an arrow function
+
+### 5.3.3. Attempts Tried
+
+Inspired by the posts listed above, I made a series of tweaks to the code that ultimately gave me
+the result I was looking for!
+
+## 5.4. Add Code in `Canvas.jsx` to `App.tsx`
+
+**Decided not to do this, for reasons given above at the beginning of this section in
+*"[Fixing the Error, Including Converting `Canvas.jsx` to `Canvas.tsx`](https://github.com/tomwhartung/always_learning_computer_graphics/blob/master/mdn/notes/5-the_simplest_canvas.md#5-fixing-the-error-including-converting-canvasjsx-to-canvastsx)"*.**
+
+## 5.5. Post to StackOverflow!
+
+**Decided not to do this, for reasons given at the beginning of this section in
+*"[Fixing the Error, Including Converting `Canvas.jsx` to `Canvas.tsx`](https://github.com/tomwhartung/always_learning_computer_graphics/blob/master/mdn/notes/5-the_simplest_canvas.md#5-fixing-the-error-including-converting-canvasjsx-to-canvastsx)"*.**
 
