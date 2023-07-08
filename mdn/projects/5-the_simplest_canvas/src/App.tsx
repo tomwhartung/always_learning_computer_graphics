@@ -18,19 +18,19 @@ const draw = (context: CanvasRenderingContext2D) => {
   context.fillStyle = "rgb(0, 0, 0)";
   context.fillRect(0, 0, width, height);
 
-  // Paint four colored squares inside the image
+  // Paint 4-8 colored squares inside the image
   context.fillStyle = "rgba(255, 0, 0, 100)";    // Red
   context.fillRect(0, 150, 50, 50);
-// context.fillRect(0, 50, 50, 50);
+  context.fillRect(0, 50, 50, 50);
   context.fillStyle = "rgba(0, 255, 0, 100)";    // Green
   context.fillRect(50, 100, 50, 50);
-// context.fillRect(50, 0, 50, 50);
+  context.fillRect(50, 0, 50, 50);
   context.fillStyle = "rgba(0, 0, 255, 100)";    // Blue
   context.fillRect(100, 50, 50, 50);
-// context.fillRect(100, 150, 50, 50);
+  context.fillRect(100, 150, 50, 50);
   context.fillStyle = "rgba(255, 255, 0, 100)";  // Yellow
   context.fillRect(150, 0, 50, 50);
-// context.fillRect(150, 100, 50, 50);
+  context.fillRect(150, 100, 50, 50);
 };
 
 // App: this App's "mainline" component
@@ -48,12 +48,20 @@ function App() {
   return (
     <>
       <h3>The Simplest Canvas Using React</h3>
-      <div>
+      <Canvas
+        draw={draw}
+        onClick={handleImageClick}
+        width={width}
+        height={height}
+      />
+      <h3 className="mt-4">The Same Canvas, but in a Card</h3>
+      <div className="card">
         <Canvas
           draw={draw}
           onClick={handleImageClick}
           width={width}
-          height={height} />
+          height={height}
+        />
       </div>
     </>
   )
