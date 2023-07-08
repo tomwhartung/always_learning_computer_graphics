@@ -1,5 +1,9 @@
 
-# always_learning_computer_graphics
+# README.md-old.md
+
+This is the original `README.md` file for the `always_learning_computer_graphics` repo.
+
+- Just keeping it around for possible future reference
 
 Play area to test-drive Python and JavaScript graphics packages.
 
