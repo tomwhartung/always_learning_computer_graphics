@@ -42,7 +42,7 @@ function App() {
     const rect = (event.target as HTMLElement).getBoundingClientRect();
     const pixelX = Math.round( event.clientX - rect.left );
     const pixelY = Math.round( event.clientY - rect.top );
-    console.log( "Someone clicked on the Canvas at (" + pixelX + ", " + pixelY + ")." );
+    console.log( "Click detected at (" + pixelX.toString() + ", " + pixelY.toString() + ")." );
   }
 
   return (
